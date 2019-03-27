@@ -18,15 +18,15 @@ We do not anticipate collecting any directly identifiable information from any o
 Our data collection will be conducted solely in the form of an online survey and this we plan to use a cover letter in place of a fully signed consent form. The cover letter will include enough information about the purpose and requirement of the survey that enables the potential participant to make a valid and informed decision to contribute to the study.  
 To comply with the UBC Office of Research Ethics we will include the following on the cover letter:
 
-•    The sentence "By completing the questionnaire, you are consenting to participate in this research."
-•    Study title
-•    The contact information of all 4 team members, and our Lab instructors (Vincenzo Coia)
-•    A description of the study 
-•    Any Risks and benefits we anticipate from the results 
-•    Whom benefits from the study 
-•    Limits to confidentiality 
-•    A statement indicating that participation is voluntary and not obligatory in any way.
-•    The UBC Research Participant Complaint Line text
-•    The UBC letterhead (if we can obtain it)
+* The sentence "By completing the questionnaire, you are consenting to participate in this research."
+* Study title
+* The contact information of all 4 team members, and our Lab instructors (Vincenzo Coia)
+* A description of the study 
+* Any Risks and benefits we anticipate from the results 
+* Whom benefits from the study 
+* Limits to confidentiality 
+* A statement indicating that participation is voluntary and not obligatory in any way.
+* The UBC Research Participant Complaint Line text
+* The UBC letterhead (if we can obtain it)
 
 Amendments to the cover letter contents could occur depending on if changes or adjustments to the survey questions materialize in Milestone2. 
