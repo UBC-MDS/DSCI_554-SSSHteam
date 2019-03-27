@@ -10,7 +10,6 @@
 
 
 
-
 ##### Discuss the aspects of the UBC Office of Research Ethics document on Using Online Surveys that are relevant to your proposed survey.
 
 We will be ensuring that all personal information collected by the survey is in custody and under control solely store in Canada and only accessed in Canada. 
