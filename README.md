@@ -1,4 +1,4 @@
-# DSCI_554-SSSHteam
+# DSCI_554-lab-time-analysis
 
 ### Authors
 
