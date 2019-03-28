@@ -4,7 +4,8 @@
 
 ##### Identify the question that your team in interested in answering with the survey. The aim of the survey should be to try to answer one specific and testable question. Examples of specific and testable questions include (you can use one of these if you really like them):
 
-> "Does a person’s choice of study location (home/academic setting/other public or private spaces) affect their productivity?”
+> "Does a person’s choice of study location (home/academic setting/other public or private spaces) affect the time you take to finish your assignments (exclusion of optional questions)?"
+
 
 ##### Describe how you plan to analyze the survey results (e.g., what statistical test(s) do you plan to employ?).
 
