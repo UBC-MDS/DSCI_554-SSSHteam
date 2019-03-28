@@ -5,7 +5,6 @@
 
 > "Does a person's choice of study location (home/academic setting/other public or private spaces) affect the time you take to finish your assignments (exclusion of optional questions)?"
 
-
 ### Identify the other questions you plan to ask in your survey to identify confounding variables and justify/explain why you plan to include them.
 
 #### Confounding Variable 1 : Procrastination
@@ -89,7 +88,6 @@ Alternate Hypothesis - The choice of study location does affect the amount of ti
 *  Inquire the effect of confounding variables (regression)  
 * Decide on interaction terms -> Additive vs. multiplicative model  
 * Perform tests and analyse results  
-
 
 
 
