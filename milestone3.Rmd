@@ -1,0 +1,63 @@
+---
+title: "Milestone2"
+author: "Simon Chiu, Sabrina Tse, Sylvia Lee,  Hayley Boyce"
+date: '2019-04-03'
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Milestone # 2 
+
+For this milestone exploratory data analysis was required. Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
+
+
+```{r}
+# reading the data into Python or R and creating a summary table
+
+data <- read_csv("DSCI554_SSSHteam_Survey.csv")
+data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
+data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
+data <- data %>% mutate(Q15 = Q15, Q2 = as.numeric(Q2), Q3 = as.numeric(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
+
+data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 )
+data
+
+``` 
+
+```{r}
+write.csv(data, file = "cleaned_data.csv")
+
+```
+
+```{r}
+plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + geom_histogram(bins = 7, colour='white') +theme_bw() + labs(x= "Level of procrastination", y = "Frequencty", title = "Distribution of procrastination levels in MDS")
+plot_Q1
+
+```
+
+```{r}
+
+boxplot(Spare_Time_Min~ProcrastLV,
+data=data,
+main="Procrast. Level vs. Spare Time after Git Push",
+xlab="Levels",
+ylab="Spare Time",
+col="white",
+border="black"
+)
+
+```
+
+reading the data into Python or R and creating a summary table
+
+
+create at least 4 visualizations of the data, these could include:
+histograms of individual variables
+joyplots, scatter, bar or boxplots combining variables
+This EDA should be in one literate code document (e.g., Jupyter notebook or .Rmd) that is nicely narrated so that someone unfamiliar with the project could easily follow what you did and why. If you choose .Rmd, please also include the rendered document in your Github repo so we can easily read the output of the run code as well.
+
+Make sure you link to a copy of this EDA in the README of your Github repo for this Milestone.
