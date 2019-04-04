@@ -25,7 +25,7 @@ data <- data %>% mutate(Q15 = Q15, Q2 = as.numeric(Q2), Q3 = as.numeric(Q3),  Q4
 
 data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 )
 data
-
+  
 ``` 
 
 ```{r}
