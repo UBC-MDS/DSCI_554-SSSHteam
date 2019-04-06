@@ -55,29 +55,20 @@ time.
 | Home     |       0.5 |          3 |           1.5 |                    40 |                     60 |                20 |             1440 |
 | Home     |       0.0 |          5 |           2.0 |                    30 |                     10 |                15 |             2880 |
 
-    ## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
-    ## This warning is displayed once per session.
+**Summary Statistics**
 
-|               Location                |   OptionalQ    |  ProcrastLV   | Household\_Hr  | Commute\_Hm\_Sch\_Min | Commute\_Stu\_Loc\_Min | Time\_On\_Lab\_Hr | Spare\_Time\_Min |
-| :-----------------------------------: | :------------: | :-----------: | :------------: | :-------------------- | :--------------------- | :---------------- | :--------------- |
-|             Academic :24              |  Min. :0.0000  |  Min. :1.000  |  Min. : 0.500  | Min. : 0.0            | Min. : 0.00            | Min. : 3.00       | Min. : 0.0       |
-|               Home :34                | 1st Qu.:0.0000 | 1st Qu.:3.000 | 1st Qu.: 1.500 | 1st Qu.:15.0          | 1st Qu.: 0.00          | 1st Qu.:15.00     | 1st Qu.: 17.5    |
-| Other settings (coffee shops, etc): 1 | Median :0.0000 | Median :4.000 | Median : 2.000 | Median :20.0          | Median :10.00          | Median :22.00     | Median : 120.0   |
-|                  NA                   |  Mean :0.9474  |  Mean :4.085  |  Mean : 3.246  | Mean :26.2            | Mean :12.27            | Mean :25.85       | Mean : 346.2     |
-|                  NA                   | 3rd Qu.:2.0000 | 3rd Qu.:5.000 | 3rd Qu.: 3.000 | 3rd Qu.:35.0          | 3rd Qu.:18.50          | 3rd Qu.:32.50     | 3rd Qu.: 300.0   |
-|                  NA                   |  Max. :6.0000  |  Max. :7.000  |  Max. :45.000  | Max. :90.0            | Max. :60.00            | Max. :85.00       | Max. :2880.0     |
-|                  NA                   |    NA’s :2     |      NA       |       NA       | NA                    | NA                     | NA                | NA               |
+![](../img/summary.PNG)
 
 **Language** Due to the statistical nature of the lab and an overall
 consensus from the team, we agreed on programming in R.
 
 ### Visualization
 
-#### Procrastination
+#### Univariat distributions
 
 To Start our EDA we wanted to confirm our hypothesis that the
 procrastination distribution among students is approximately normal.
-![](Milestone2_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Milestone2_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ###### Figure 1: Procrastination levels amoung UBC MDS 2018-2019 cohort
 
@@ -95,6 +86,27 @@ The count per level can be seen below:
 |          6 |     8 |
 |          7 |     4 |
 
+#### Procrastination as a confounder
+
+``` r
+data %>% filter(Location %in% c("Academic", "Home")) %>% 
+  ggplot(aes(x = ProcrastLV)) + 
+  geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + 
+  scale_x_continuous(breaks = seq(1, 7, len = 7) )+
+  facet_wrap(~Location)
+```
+
+![](Milestone2_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+\#\#\#\#\#\# Figure 2: Distribution of procrastination levels amoung UBC
+MDS 2018-2019 cohort
+
+Interestings, there a higher proportion of students that usually study
+at home considers themselves as procrastate. In contrast, the
+distribution of procrastination levels seems to be more even with
+students that usually studies at school.
+
 Intuitively, we predicted that procrastination level would be correlated
 with the amount of spare time students have between assignment
 completion and the submit
@@ -109,12 +121,16 @@ time and procrastination level. Students across all categories mainly
 aggregated around 0minutes to 500minutes. However, There is a student
 with large amount of spare time in the intermediate procrastination
 levels (level 3,4,5,6). It is hard to determine at this point whether
-these students should be considered
-outlies.
+these students should be considered outlies. But interestingly,
+procrastination level does not seem to affect the time taken to complete
+assignements (see
+below):
+
+![](Milestone2_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 #### Study Location
 
-![](Milestone2_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Milestone2_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ###### Figure 3: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
 
@@ -123,7 +139,7 @@ home. Furthermore, we identified that `household responsibilties` is a
 confounding variable to affect the choice of study location. Proceeding
 further, we wanted to see if people who spent more time on household
 responsibilities tend to study more from home.
-![](Milestone2_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Milestone2_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ###### Figure 4: Scatterplot of relationship between Daily household responsabilities vs time spent on labs among UBC MDS 2018-2019 cohort students
 
@@ -135,6 +151,43 @@ have to spend less time on labs to accommodate time required for their
 household responsibilties
 
 Additionally, we expected travel time from to school and to study
-locations to influence a student’s choice of site.
+locations to influence a student’s choice of site. As there is only one
+student that prefer to study in sites outside of school and home, this
+data is omitted from the following visual
+analyses.
 
-![](Milestone2_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](Milestone2_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+###### Figure 5. Distribution of average daily one-way commute time between home and school for different study locations.
+
+We observed that the distribution of travel time for students that
+prefer studying at home is more much skewed. This indicates that
+students with extremely long travel times are less likely to study at
+school, whom may be the outliers. Thus, we can estimate the centrality
+of these distributions with the median, which seems roughly the same
+among the two groups. Additionally, the IQR of both distributions is
+very
+similar.
+
+![](Milestone2_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+###### Figure 6. Distribution of average time taken purposefully to travel to study location in relation to the student’s usual study locations.
+
+Interestingly, students that usually study at school, seems to be more
+likely to take extra time travelling to their study locations. This
+suggest that a student’s tolerant to spending extra time travelling to
+their usual study spot may be confounding of their choice. It is
+possible that students that studies at home is less willing to spend
+time on travel.
+
+## Conclusion
+
+Our dataset is very imbalanced as we only retreived one data point for
+the `Other Settings` variable. In our analysis, we might consider
+dropping this data point as it could not be representative of the group.
+In regards to only the `Academic` and `Home` groups, they are relatively
+balanced with 24 and 34 students respectively. In the above EDA we found
+not all variables explored are confounding on the choice of study
+location or the time spent on assignments. In particularly, The EDA
+suggests that only the tolerance of time spent on travelling and
+procrastination may have confounding effects.
