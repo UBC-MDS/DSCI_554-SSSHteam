@@ -6,6 +6,17 @@ Simon Chiu, Sabrina Tse, Sylvia Lee, Hayley Boyce
 Introduction
 ------------
 
+#### Survey
+
+Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
+
+
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. In total, we received 65 responses.
+
+
+#### Exploratory Data Analysis
+
+**Language**
 For this milestone exploratory data analysis was required. Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
 
 ``` r
@@ -24,11 +35,11 @@ data <- read_csv("../DSCI554_SSSHteam_Survey.csv")
 ``` r
 data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
 data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
-data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) 
-# adjusting the category types 
+data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15))
+# adjusting the category types
 data <- data %>% mutate(Q15 = as.factor(Q15), Q2 = as.numeric(Q2), Q3 = as.integer(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
 
-data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 ) 
+data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 )
 ```
 
 ``` r
@@ -44,8 +55,9 @@ kable(head(data))
 | Home     |        0.5|           3|            1.5|                     40|                      60|                 20|              1440|
 | Home     |        0.0|           5|            2.0|                     30|                      10|                 15|              2880|
 
+
 ``` r
-# added a clean data csv to private repo 
+# added a clean data csv to private repo
 write.csv(data, file = "cleaned_data.csv")
 ```
 
@@ -61,6 +73,12 @@ A discription of the variables are as followed:
 -   `Commute_Stu_Loc_Min (dbl)`: Continuous variable, the amount of time it takes to move to their usual study location in minutes.
 -   `Time_On_Lab_Hr (dbl)`: Continuous variable, the amount of time taken to complete all four labs in hours.
 -   `Spare_Time_Min (dbl)`: Continuous variable, the amount of spare time a person has left before the submission time.
+
+
+**Summary**
+
+![](summary.png)
+
 
 ### Procrastination
 
@@ -78,7 +96,7 @@ plot_Q1
 Exactly what does the Ratio of students to study location look like?
 
 ``` r
-plot_Q1 <- data %>% ggplot() + geom_bar(aes(x=Location), colour='white', fill = "#082042") +theme_bw() + labs(x= "Location", y = "Quantity of MDS Students", title = "Amount of MDS Students usual Study Location") 
+plot_Q1 <- data %>% ggplot() + geom_bar(aes(x=Location), colour='white', fill = "#082042") +theme_bw() + labs(x= "Location", y = "Quantity of MDS Students", title = "Amount of MDS Students usual Study Location")
 plot_Q1
 ```
 

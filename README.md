@@ -5,11 +5,6 @@
 | [Simon Chiu](https://github.com/cheukman1207) | [Sabrina Tse](https://github.com/sabrinatkk) | [Sylvia Lee](https://github.com/LeeYinYing)| [Hayley Boyce](https://github.com/hfboyce)
 |:------------:|:--------------:|:--------------:|:--------------:|
 
-### Project Summary  
-
-
-
-
 ### Project Set Up
 
 * Collaboration Strategy:
@@ -21,3 +16,20 @@
     UBC Qualtrics:  https://ubc.qualtrics.com
 
     The server is hosted in Canada.
+
+* Survey Set-up:
+
+[Milestone1](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone1.md)
+
+#### Survey
+
+Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
+
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. In total, we received 65 responses.
+
+
+#### Post-Survey Analysis
+
+For more details, please click:
+
+[Milestone2](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone2.md)
