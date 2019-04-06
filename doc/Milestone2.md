@@ -8,12 +8,25 @@ Introduction
 
 Survey link: <https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL>
 
-The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. In total, we received 65 responses.
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference.
 
 The Data
 --------
 
 Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. We found specifying the lab tiem to a particular competed block that was recent would contribute to more accurate results. To keep complete anonymity, we did not collect any data that could be considered as direct or quasi identifying.
+
+### Variable Discription
+
+A discription of the variables are as followed:
+
+-   `Location (fctr)`: Categorical variable, a person's usual study location.
+-   `OptionalQ (dbl)`: Continuous variable, how long a person spends doing bonus questions.
+-   `ProcrastLV (int)`: Discrete variable, the level of procrastination of which a person identifies. This is an ordinal scale from 1-7, 1 being not a procrastinator and 7 being the highest form of procrastination.
+-   `Household_Hr (dbl)`: Continuous variable, the amount of daily household responsibilities in hours a person assumes.
+-   `Commute_Hm_Sch_Min (dbl)`: Continuous variable, the amount of time it takes to commute from their home to school (one way) in minutes.
+-   `Commute_Stu_Loc_Min (dbl)`: Continuous variable, the amount of time it takes to move to their usual study location in minutes.
+-   `Time_On_Lab_Hr (dbl)`: Continuous variable, the amount of time taken to complete all four labs in hours.
+-   `Spare_Time_Min (dbl)`: Continuous variable, the amount of spare time a person has left before the submission time.
 
 **Language** Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
 
@@ -77,19 +90,6 @@ data  %>% summary()
 
 ![](../img/summary.png)
 
-### Variable Discription
-
-A discription of the variables are as followed:
-
--   `Location (fctr)`: Categorical variable, a person's usual study location.
--   `OptionalQ (dbl)`: Continuous variable, how long a person spends doing bonus questions.
--   `ProcrastLV (int)`: Discrete variable, the level of procrastination of which a person identifies. This is an ordinal scale from 1-7, 1 being not a procrastinator and 7 being the highest form of procrastination.
--   `Household_Hr (dbl)`: Continuous variable, the amount of daily household responsibilities in hours a person assumes.
--   `Commute_Hm_Sch_Min (dbl)`: Continuous variable, the amount of time it takes to commute from their home to school (one way) in minutes.
--   `Commute_Stu_Loc_Min (dbl)`: Continuous variable, the amount of time it takes to move to their usual study location in minutes.
--   `Time_On_Lab_Hr (dbl)`: Continuous variable, the amount of time taken to complete all four labs in hours.
--   `Spare_Time_Min (dbl)`: Continuous variable, the amount of spare time a person has left before the submission time.
-
 ### Procrastination
 
 To Start our EDA we wanted to confirm our hypothesis that the pracratination distribution among students is approximately normal.
@@ -128,7 +128,7 @@ plot_Q1 <- data %>% ggplot() + geom_bar(aes(x=Location), colour='white', fill = 
 plot_Q1
 ```
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-9-1.png) \#\#\#\#\#\# Figure 2: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
 
 This seems to show that most student usually study at home however, the quantity of students who use school resources is still very high. Very few people use other locations to do there school work.
 
