@@ -95,24 +95,37 @@ The count per level can be seen below:
 |          6 |     8 |
 |          7 |     4 |
 
-#### Study Location
+Intuitively, we predicted that procrastination level would be correlated
+with the amount of spare time students have between assignment
+completion and the submit
+deadline
 
 ![](Milestone2_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-###### Figure 2: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
+###### Figure 2: Procrastination levels in relation to spare time before submission deadline
+
+We did not observe the expected negative relationship between the spare
+time and procrastination level. Students across all categories mainly
+aggregated around 0minutes to 500minutes. However, There is a student
+with large amount of spare time in the intermediate procrastination
+levels (level 3,4,5,6). It is hard to determine at this point whether
+these students should be considered
+outlies.
+
+#### Study Location
+
+![](Milestone2_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+###### Figure 3: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
 
 From the graph above, we can see that most of us usually study from
 home. Furthermore, we identified that `household responsibilties` is a
-confounding variable to affect the choice of study location. In the next
-section, we will explore on the confounding variable.
+confounding variable to affect the choice of study location. Proceeding
+further, we wanted to see if people who spent more time on household
+responsibilities tend to study more from home.
+![](Milestone2_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-#### Household Responsibilties vs Study Location
-
-Proceeding further, we wanted to see if people who spent more time on
-household responsibilities tend to study more from home.
-![](Milestone2_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
-
-###### Figure 3: Scatterplot of relationship between Daily household responsabilities vs time spent on labs among UBC MDS 2018-2019 cohort students
+###### Figure 4: Scatterplot of relationship between Daily household responsabilities vs time spent on labs among UBC MDS 2018-2019 cohort students
 
 To give a more clear relationship we took the log scale of both axis,
 which did not seem to show anything substantial. This was unexpected as
@@ -121,4 +134,7 @@ tend to study more at home. We also expected those individuals would
 have to spend less time on labs to accommodate time required for their
 household responsibilties
 
-![](Milestone2_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+Additionally, we expected travel time from to school and to study
+locations to influence a student’s choice of site.
+
+![](Milestone2_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
