@@ -79,12 +79,10 @@ kable(head(data))
   
 ```
 
+**Summary Statistics**
 
 
-```{r echo = FALSE}
-summary_df <- as.tibble(as.data.frame.matrix(summary(data), row.names = FALSE))
-kable(summary_df, row.names = FALSE)
-```
+![](../img/summary.PNG)
 
 
 **Language**
@@ -93,7 +91,7 @@ kable(summary_df, row.names = FALSE)
 
 ### Visualization
 
-#### Procrastination 
+#### Univariat distributions
 
 To Start our EDA we wanted to confirm our hypothesis that the procrastination distribution among students is approximately normal. 
 ```{r echo = FALSE}
@@ -107,6 +105,7 @@ plot_Q1
 
 ```
 
+
 ###### Figure 1: Procrastination levels amoung UBC MDS 2018-2019 cohort 
  
 You can see that most people consider themselves to be neither extremely active in lab completetion nor do they leave things to the last moment. The count per level can be seen below: 
@@ -117,12 +116,28 @@ procrastT <- data %>% group_by(ProcrastLV) %>% summarise(count = n())
 kable(procrastT)
 ```
 
+#### Procrastination as a confounder
+
+```{r}
+data %>% filter(Location %in% c("Academic", "Home")) %>% 
+  ggplot(aes(x = ProcrastLV)) + 
+  geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + 
+  scale_x_continuous(breaks = seq(1, 7, len = 7) )+
+  facet_wrap(~Location)
+```
+###### Figure 2: Distribution of procrastination levels amoung UBC MDS 2018-2019 cohort 
+
+Interestings, there a higher proportion of students that usually study at home considers themselves as procrastate. In contrast, the distribution of procrastination levels seems to be more even with students that usually studies at school.
+
+
 Intuitively, we predicted that procrastination level would be correlated with the amount of spare time students have between assignment completion and the submit deadline
 
 ```{r echo = FALSE}
 data %>% 
 ggplot(aes(x = as.factor(ProcrastLV), y = Spare_Time_Min))+
-  geom_jitter(alpha = 0.3, width = 0.25)+
+  geom_jitter(alpha = 0.5, width = 0.25, color = "#082042")+
   labs(y = "Spare Time (min)",
        x = "Procrastination Level (7 = extreme procrastinator)",
        title = "Student's self-acknowledged procrastination level in relation to spare time") +
@@ -132,7 +147,18 @@ ggplot(aes(x = as.factor(ProcrastLV), y = Spare_Time_Min))+
 
 ###### Figure 2: Procrastination levels in relation to spare time before submission deadline
 
-We did not observe the expected negative relationship between the spare time and procrastination level. Students across all categories mainly aggregated around 0minutes to 500minutes. However, There is a student with large amount of spare time in the intermediate procrastination levels (level 3,4,5,6). It is hard to determine at this point whether these students should be considered outlies. 
+We did not observe the expected negative relationship between the spare time and procrastination level. Students across all categories mainly aggregated around 0minutes to 500minutes. However, There is a student with large amount of spare time in the intermediate procrastination levels (level 3,4,5,6). It is hard to determine at this point whether these students should be considered outlies. But interestingly, procrastination level does not seem to affect the time taken to complete assignements (see below):
+
+```{r echo = FALSE}
+data %>% 
+ggplot(aes(x = as.factor(ProcrastLV), y = Time_On_Lab_Hr))+
+  geom_jitter(alpha = 0.5, width = 0.25, color = "#082042")+
+  labs(y = "Spare Time (min)",
+       x = "Procrastination Level (7 = extreme procrastinator)",
+       title = "Student's self-acknowledged procrastination level in relation to time spent on labs") +
+  theme_bw()
+
+```
 
 #### Study Location
 
@@ -182,7 +208,7 @@ data %>%
     theme_bw()
 ```
 
-##### Figure 5. Distribution of average daily one-way commute time between home and school for different study locations.
+###### Figure 5. Distribution of average daily one-way commute time between home and school for different study locations.
 
 We observed that the distribution of travel time for students that prefer studying at home is more much skewed. This indicates that students with extremely long travel times are less likely to study at school, whom may be the outliers. Thus, we can estimate the centrality of these distributions with the median, which seems roughly the same among the two groups. Additionally, the IQR of both distributions is very similar. 
 
@@ -199,8 +225,11 @@ data %>%
     theme_bw()
 ```
 
-##### Figure 6. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations. 
+###### Figure 6. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations. 
 
 Interestingly, students that usually study at school, seems to be more likely to take extra time travelling to their study locations. This suggest that a student's tolerant to spending extra time travelling to their usual study spot may be confounding of their choice. It is possible that students that studies at home is less willing to spend time on travel. 
 
 
+## Conclusion
+
+Our dataset is very imbalanced as we only retreived one data point for the `Other Settings` variable. In our analysis, we might consider dropping this data point as it could not be representative of the group. In regards to only the `Academic` and `Home` groups, they are relatively balanced with 24 and 34 students respectively. In the above EDA we found not all variables explored are confounding on the choice of study location or the time spent on assignments. In particularly, The EDA suggests that only the tolerance of time spent on travelling and procrastination may have confounding effects. 
