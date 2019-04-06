@@ -11,18 +11,36 @@ library(tidyverse)
 library(knitr)
 ```
 
-## Introduction
 
+## Introduction
+Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
+
+
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. In total, we received 65 responses.
+
+
+#### Exploratory Data Analysis
+
+**Language**
 For this milestone exploratory data analysis was required. Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
 
+We started by obtaining the data and cleaning it. 
 
-```{r, warning = FALSE}
+```{r}
 # reading the data into Python or R and creating a summary table
 
-data <- read_csv("../DSCI554_SSSHteam_Survey.csv")
+data <- read_csv("../raw_uncleaned.csv")
+```
+
+```{r, warning = FALSE}
+# Cleaning and wrangling the data
+
+#filtering out span and those who did not want to participate
 data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
 data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
 data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) 
+
+
 # adjusting the category types 
 data <- data %>% mutate(Q15 = as.factor(Q15), Q2 = as.numeric(Q2), Q3 = as.integer(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
 
@@ -37,12 +55,16 @@ head(data)
 ```{r}
 kable(head(data))
   
-``` 
-```{r}
+```
 
+
+```{r}
 summary(data)
 ```
 
+**Summary**
+
+![](../img/summary.png)
 
 ```{r}
 # added a clean data csv to private repo 
@@ -100,6 +122,9 @@ plot_Q3
 
 
 To give a more clear relationship we took the log scale of both axis, which did not seem to show anything substantial. This was unexpected as we anticipated people with more responsibilities to study more at home. 
+
+
+
 
 
 
