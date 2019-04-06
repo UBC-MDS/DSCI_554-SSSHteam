@@ -20,7 +20,7 @@ The survey was conducted online anonymously during the lab session on April 3rd,
 
 ## The Data 
 
-Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. We found specifying the lab tiem to a particular competed block that was recent would contribute to more accurate results.  To keep complete anonymity, we did not collect any data that could be considered as direct or quasi identifying. 
+Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. In the pursuit of more accurate results, we tried to reduce the confounding variable of block difficulty by limiting to a specific recently completed block. To keep complete anonymity, we did not collect any data that could be considered as direct or quasi identifying. 
 
 ### Variable Discription
 
@@ -37,33 +37,46 @@ A discription of the variables are as followed:
 
 
 **Language**
- Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
+ Due to the statistical nature of the lab and an overall consensus from the team, we agreed on programming in R.
  
 
 ```{r,  echo= FALSE, include=FALSE}
 # reading the data into Python or R and creating a summary table
 
-data <- read_csv("../raw_uncleaned.csv")
+data <- read_csv("../raw_data.csv")
 ```
 
 ```{r, warning = FALSE, echo= FALSE, include=FALSE}
 # Cleaning and wrangling the data
 
 #filtering out span and those who did not want to participate
-data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
-data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
-data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) 
+data <- data %>% 
+  filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% 
+  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
+         Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) %>% 
+      select(Q15, Q2, Q3, Q4,Q16, Q11, Q5, Q18)
 
 
 # adjusting the category types 
-data <- data %>% mutate(Q15 = as.factor(Q15), Q2 = as.numeric(Q2), Q3 = as.integer(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
+data <- data %>% 
+  mutate(Q15 = as.factor(Q15), 
+         Q2 = as.numeric(Q2), 
+         Q3 = as.integer(Q3),  
+         Q4 = as.numeric(Q4),  
+         Q16 = as.numeric(Q16),  
+         Q11 = as.numeric(Q11), 
+         Q5 = as.numeric(Q5),
+         Q18= as.numeric(Q18) )
 
-data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 ) 
+data <- data %>% rename(Location = Q15, 
+                        OptionalQ = Q2, 
+                        ProcrastLV = Q3,  
+                        Household_Hr = Q4,  
+                        Commute_Hm_Sch_Min = Q16,  
+                        Commute_Stu_Loc_Min = Q11, 
+                        Time_On_Lab_Hr = Q5, 
+                        Spare_Time_Min= Q18 ) 
 
-```
-
-```{r, echo=FALSE, include=FALSE}
-head(data)
 ```
 
 ```{r}
@@ -73,7 +86,7 @@ kable(head(data))
 
 
 
-```{r}
+```{r eval = FALSE}
 kable(summary(data))
 ```
 
@@ -85,17 +98,22 @@ kable(summary(data))
 ### Procrastination 
 
 To Start our EDA we wanted to confirm our hypothesis that the pracratination distribution among students is approximately normal. 
-```{r}
+```{r include = FALSE}
 
-plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + theme_bw() + labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + scale_x_continuous(breaks = seq(1, 7, len = 7) )
+plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + 
+  geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + 
+  scale_x_continuous(breaks = seq(1, 7, len = 7) )
 plot_Q1
 
 ```
+
 ###### Figure 1: Procrastination levels amoung UBC MDS 2018-2019 cohort 
  
- You can see that most people consider themselves to be neither extremely active in lab completetion nor do they leave things to the last moment. the exact number per level can be seen below: 
+ You can see that most people consider themselves to be neither extremely active in lab completion nor do they leave things to the last moment. The exact number per level can be seen below: 
  
-```{r}
+```{r include = FALSE}
 procrastT <- data %>% group_by(ProcrastLV) %>% summarise(count = n())
 
 kable(procrastT)
@@ -106,7 +124,7 @@ kable(procrastT)
 
 Exactly what does the Ratio of students to study location look like?
 
-```{r}
+```{r include = FALSE}
 
 plot_Q1 <- data %>% ggplot() + geom_bar(aes(x=Location), colour='white', fill = "#082042") +theme_bw() + labs(x= "Location", y = "Quantity of MDS Students", title = "Amount of MDS Students usual Study Location") 
 plot_Q1
