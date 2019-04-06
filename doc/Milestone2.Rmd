@@ -11,44 +11,16 @@ library(tidyverse)
 library(knitr)
 ```
 
+
 ## Introduction
-
-For this milestone exploratory data analysis was required. Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
-
-
-```{r, warning = FALSE}
-# reading the data into Python or R and creating a summary table
-
-data <- read_csv("../DSCI554_SSSHteam_Survey.csv")
-data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
-data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
-data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) 
-# adjusting the category types 
-data <- data %>% mutate(Q15 = as.factor(Q15), Q2 = as.numeric(Q2), Q3 = as.integer(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
-
-data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 ) 
-
-```
-
-```{r, echo=FALSE, include=FALSE}
-head(data)
-```
-
-```{r}
-kable(head(data))
-  
-``` 
-```{r}
-
-summary(data)
-```
+Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
 
 
-```{r}
-# added a clean data csv to private repo 
-write.csv(data, file = "cleaned_data.csv")
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. In total, we received 65 responses.
 
-```
+## The Data 
+
+Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. We found specifying the lab tiem to a particular competed block that was recent would contribute to more accurate results.  To keep complete anonymity, we did not collect any data that could be considered as direct or quasi identifying. 
 
 ### Variable Discription
 
@@ -64,14 +36,73 @@ A discription of the variables are as followed:
 * `Spare_Time_Min (dbl)`:  Continuous variable, the amount of spare time a person has left before the submission time.   
 
 
+**Language**
+ Due to the statistical nature of the lab and an overall consensus, we agreed on programming in R.
+ 
+
+```{r,  echo= FALSE, include=FALSE}
+# reading the data into Python or R and creating a summary table
+
+data <- read_csv("../raw_uncleaned.csv")
+```
+
+```{r, warning = FALSE, echo= FALSE, include=FALSE}
+# Cleaning and wrangling the data
+
+#filtering out span and those who did not want to participate
+data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% select(Q15, Q2, Q2_1_TEXT, Q3, Q4,Q16, Q11, Q5, Q18)
+data <- data %>%  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT)) %>% select(-Q2_1_TEXT)
+data <- data %>%  mutate(Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) 
+
+
+# adjusting the category types 
+data <- data %>% mutate(Q15 = as.factor(Q15), Q2 = as.numeric(Q2), Q3 = as.integer(Q3),  Q4 = as.numeric(Q4),  Q16 = as.numeric(Q16),  Q11 = as.numeric(Q11), Q5 = as.numeric(Q5), Q18= as.numeric(Q18) )
+
+data <- data %>% rename(Location = Q15, OptionalQ = Q2, ProcrastLV = Q3,  Household_Hr = Q4,  Commute_Hm_Sch_Min = Q16,  Commute_Stu_Loc_Min = Q11, Time_On_Lab_Hr = Q5, Spare_Time_Min= Q18 ) 
+
+```
+
+```{r, echo=FALSE, include=FALSE}
+head(data)
+```
+
+```{r}
+kable(head(data))
+  
+```
+
+
+
+```{r}
+kable(summary(data))
+```
+```{r}
+data  %>% summary()
+```
+
+
+**Summary**
+
+![](../img/summary.png)
+
+
 ### Procrastination 
 
 To Start our EDA we wanted to confirm our hypothesis that the pracratination distribution among students is approximately normal. 
 ```{r}
 
-plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + geom_histogram(bins = 7, colour='white', fill = "#51B1D9") +theme_bw() + labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + scale_x_continuous(breaks = seq(1, 7, len = 7) )
+plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + theme_bw() + labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + scale_x_continuous(breaks = seq(1, 7, len = 7) )
 plot_Q1
 
+```
+ ###### Figure 1: Procrastination levels amoung UBC MDS 2018-2019 cohort 
+ 
+ You can see that most people consider themselves to be neither extremely active in lab completetion nor do they leave things to the last moment. the exact number per level can be seen below: 
+ 
+```{r}
+procrastT <- data %>% group_by(ProcrastLV) %>% summarise(count = n())
+
+kable(procrastT)
 ```
  
 
@@ -100,6 +131,9 @@ plot_Q3
 
 
 To give a more clear relationship we took the log scale of both axis, which did not seem to show anything substantial. This was unexpected as we anticipated people with more responsibilities to study more at home. 
+
+
+
 
 
 
