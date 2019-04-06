@@ -66,7 +66,7 @@ consensus from the team, we agreed on programming in R.
 
 #### Univariat distributions
 
-To Start our EDA we wanted to confirm our hypothesis that the
+To start our EDA we wanted to confirm our hypothesis that the
 procrastination distribution among students is approximately normal.
 ![](Milestone2_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
