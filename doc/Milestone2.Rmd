@@ -38,6 +38,11 @@ head(data)
 kable(head(data))
   
 ``` 
+```{r}
+
+summary(data)
+```
+
 
 ```{r}
 # added a clean data csv to private repo 
