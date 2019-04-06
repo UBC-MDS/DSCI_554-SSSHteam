@@ -93,7 +93,7 @@ kable(head(data))
 
 #### Univariat distributions
 
-To Start our EDA we wanted to confirm our hypothesis that the procrastination distribution among students is approximately normal. 
+To start our EDA we wanted to confirm our hypothesis that the procrastination distribution among students is approximately normal. 
 ```{r echo = FALSE}
 
 plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + 
@@ -228,7 +228,6 @@ data %>%
 ###### Figure 6. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations. 
 
 Interestingly, students that usually study at school, seems to be more likely to take extra time travelling to their study locations. This suggest that a student's tolerant to spending extra time travelling to their usual study spot may be confounding of their choice. It is possible that students that studies at home is less willing to spend time on travel. 
-
 
 ## Conclusion
 
