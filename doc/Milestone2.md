@@ -47,13 +47,23 @@ Due to the statistical nature of the lab and an overall consensus from the team,
 Visualization
 -------------
 
+To answer our general question:
+
+**"Does a person's choice of study location (home/academic setting/other public spaces) affect the time they take to finish their MDS assignments (exclusion of optional questions)?"**
+
+The graph illustrates the relationship between the dependent (time spent on labs) and the independent variable (study location) in our study. The visualization shows a greater range of time among students who study at school. The time spent on lab assignments for students who study in the academic location is mostly concentrated around 10 to 30 hours per week, whereas the "Home" group has a wider time range from 9 to 40 hours. The distribution of students who work at home definitely has a smaller standard deviation from the average. For the majority of the analysis, we omit the `other` categorical variable as we feel it is an outlier with a single data point.
+
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+###### Figure 1. Distribution of average weekly time spent on assignments in relatioin to a student's usual study site.
+
 #### Univariate distributions
 
 To start our EDA we wanted to confirm our hypothesis that the procrastination distribution among students is approximately normal.
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-###### Figure 1: Procrastination levels amoung UBC MDS 2018-2019 cohort
+###### Figure 2: Procrastination levels amoung UBC MDS 2018-2019 cohort
 
 You can see that most people consider themselves to be neither extremely active in lab competition nor do they leave things to the last moment. The count per level can be seen below:
 
@@ -79,49 +89,49 @@ data %>% filter(Location %in% c("Academic", "Home")) %>%
   facet_wrap(~Location)
 ```
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-###### Figure 2: Distribution of procrastination levels among UBC MDS 2018-2019 cohort
+###### Figure 3 Distribution of procrastination levels among UBC MDS 2018-2019 cohort
 
 Interestingly, there is a higher proportion of students that usually study at home who consider themselves as procrastinators. In contrast, the distribution of procrastination levels seems to be more even with students that usually studies at school.
 
 Intuitively, we predicted that procrastination level would be correlated with the amount of spare time students have between assignment completion and the submission deadline.
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-###### Figure 3: Procrastination levels in relation to spare time before submission deadline
+###### Figure 4: Procrastination levels in relation to spare time before submission deadline
 
 We did not observe the expected negative relationship between spare time and procrastination level. Students across all categories mainly aggregated around 0 minutes to 500 minutes. However, There is a student with a large amount of spare time in the intermediate procrastination levels (level 3,4,5,6). It is hard to determine at this point whether these students should be considered outliers. But interestingly, procrastination level does not seem to affect the time taken to complete assignments (see below):
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-###### Figure 4: Distribution of Student's self-acknowledged procrastination leve vs time spent on labs
+###### Figure 5: Distribution of Student's self-acknowledged procrastination leve vs time spent on labs
 
 #### Study Location
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-###### Figure 5: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
+###### Figure 6: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
 
 From the graph above, we can see that most of us usually study from home. Furthermore, we identified that `household responsibilities` is a confounding variable to affect the choice of study location. Proceeding further, we wanted to see if people who spent more time on household responsibilities tend to study more from home.
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
-###### Figure 6: Scatterplot of the relationship between daily household responsibilities vs time spent on labs among UBC MDS 2018-2019 cohort students
+###### Figure 7: Scatterplot of the relationship between daily household responsibilities vs time spent on labs among UBC MDS 2018-2019 cohort students
 
 To give a more clear relationship we took the log scale of both axes, which did not seem to show anything substantial. This was unexpected as we anticipated people with more hours of household responsibilities would tend to study more at home. We also expected those individuals would have to spend less time on labs to accommodate the time required for their household responsibilities
 
 Additionally, we expected travel time from school and to study locations to influence a student's choice of site. As there is only one student that prefer to study in sites outside of school and home, this data is omitted from the following visual analyses.
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
-###### Figure 7. Distribution of average daily one-way commute time between home and school for different study locations.
+###### Figure 8. Distribution of average daily one-way commute time between home and school for different study locations.
 
 We observed that the distribution of travel time for students that prefer studying at home is more much skewed. This indicates that students with extremely long travel times are less likely to study at school, who may be the outliers. Thus, we can estimate the centrality of these distributions with the median, which seems roughly the same among the two groups. Additionally, the IQR of both distributions is very similar.
 
-![](Milestone2_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](Milestone2_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
-###### Figure 8. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations.
+###### Figure 9. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations.
 
 Interestingly, students that usually study at school, seems to be more likely to take extra time traveling to their study locations. This suggests that a student's tolerant of spending extra time traveling to their usual study spot may be confounding of their choice. It is possible that students that studies at home are less willing to spend time on travel.
 

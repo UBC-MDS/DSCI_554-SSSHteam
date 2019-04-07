@@ -38,4 +38,5 @@ For more details, please click:
 
 #### Data Storage
 
-the data used for this analysis is store in a private repo given only to those with authorized access. 
+The data used for this analysis is store in a private repo given only to those with authorized access. 
+stored [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA)
