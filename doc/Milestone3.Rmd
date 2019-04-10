@@ -1,0 +1,273 @@
+---
+title: "Milestone3"   
+author: "Simon Chiu, Sabrina Tse, Sylvia Lee,  Hayley Boyce"  
+date: '2019-04-10'
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+```
+
+## Objective 
+
+Our Team created the following analysis to address the following research question:
+
+**"Does a person's choice of study location (home/academic setting/other public spaces) affect the time they take to finish their MDS assignments (exclusion of optional questions)?"**
+
+The members of our team have various study habits. Some of us live close to school, other farther away  
+We were curious to see if there was a relationship between completion time of labs and an individual's choice of study location. 
+
+
+
+
+## Method  
+Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
+
+
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the responders were UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference.
+
+## The Data 
+
+Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. In the pursuit of more accurate results, we tried to reduce the confounding variable of block difficulty by limiting to a specific recently completed block. To keep complete anonymity, we did not collect any data that could be considered as direct or quasi-identifying. 
+
+### Variable Discription
+
+A description of the variables are as followed: 
+
+* `Location (fctr)`: Categorical variable, a person's usual study location.  
+* `OptionalQ (dbl)`: Continuous variable, how long a person spends doing bonus questions.    
+* `ProcrastLV (int)`: Discrete variable, the level of procrastination of which a person identifies. This is an ordinal scale from 1-7, 1 being not a procrastinator and 7 being the highest form of procrastination.
+* `Household_Hr (dbl)`: Continuous variable, the amount of daily household responsibilities in hours a person assumes.   
+* `Commute_Hm_Sch_Min (dbl)`: Continuous variable, the amount of time it takes to commute from their home to school (one way) in minutes.  
+* `Commute_Stu_Loc_Min (dbl)`:  Continuous variable, the amount of time it takes to move to their usual study location in minutes.  
+* `Time_On_Lab_Hr (dbl)`:  Continuous variable, the amount of time taken to complete all four labs in hours.   
+* `Spare_Time_Min (dbl)`:  Continuous variable, the amount of spare time a person has left before the submission time.  
+
+```{r,  echo= FALSE, include=FALSE}
+# reading the data into Python or R and creating a summary table
+
+data <- read_csv("../raw_data.csv")
+```
+
+```{r, warning = FALSE, echo= FALSE, include=FALSE}
+# Cleaning and wrangling the data
+#filtering out span and those who did not want to participate
+data <- data %>% 
+  filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% 
+  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
+         Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) %>% 
+      select(Q15, Q2, Q3, Q4,Q16, Q11, Q5, Q18)
+
+
+# adjusting the category types 
+data <- data %>% 
+  mutate(Q15 = as.factor(Q15), 
+         Q2 = as.numeric(Q2), 
+         Q3 = as.integer(Q3),  
+         Q4 = as.numeric(Q4),  
+         Q16 = as.numeric(Q16),  
+         Q11 = as.numeric(Q11), 
+         Q5 = as.numeric(Q5),
+         Q18= as.numeric(Q18) )
+
+data <- data %>% rename(Location = Q15, 
+                        OptionalQ = Q2, 
+                        ProcrastLV = Q3,  
+                        Household_Hr = Q4,  
+                        Commute_Hm_Sch_Min = Q16,  
+                        Commute_Stu_Loc_Min = Q11, 
+                        Time_On_Lab_Hr = Q5, 
+                        Spare_Time_Min= Q18 ) 
+
+```
+
+
+```{r echo = FALSE, include = TRUE}
+kable(head(data))
+  
+```
+
+
+## Findings
+ 
+
+## Conclusions 
+
+## Assumptions
+
+## Limitations
+
+## Future Directions
+- age 
+
+## References 
+
+
+
+
+
+```{r echo = FALSE, message = FALSE, results='hide',fig.keep='all'}
+plot_Q <- ggplot(data, aes(Location, Time_On_Lab_Hr))+
+  geom_violin(color = NA, fill = "#51B1D9", alpha = 0.3)+
+  geom_jitter(width = 0.3, alpha = 0.3)+ theme_bw()
+  labs(x = 'Usual Study Location',
+       y = 'Average weekly time (hr)',
+       title = 'Average weekly time spent on lab assignments in relation to study location')
+  
+plot_Q
+```
+
+######Figure 1. Distribution of average weekly time spent on assignments in relatioin to a student's usual study site.
+
+
+
+
+#### Univariate distributions
+
+To start our EDA we wanted to confirm our hypothesis that the procrastination distribution among students is approximately normal. 
+
+```{r echo = FALSE}
+
+plot_Q1 <- ggplot(data, aes(x = ProcrastLV)) + 
+  geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels Among MDS Students") + 
+  scale_x_continuous(breaks = seq(1, 7, len = 7) )
+plot_Q1
+
+```
+
+###### Figure 2: Procrastination levels amoung UBC MDS 2018-2019 cohort 
+ 
+You can see that most people consider themselves to be neither extremely active in lab competition nor do they leave things to the last moment. The count per level can be seen below: 
+ 
+```{r echo = FALSE}
+procrastT <- data %>% group_by(ProcrastLV) %>% summarise(count = n())
+
+kable(procrastT)
+```
+
+#### Procrastination as a confounder
+
+```{r}
+data %>% filter(Location %in% c("Academic", "Home")) %>% 
+  ggplot(aes(x = ProcrastLV)) + 
+  geom_histogram(bins = 7, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Procrastination levels among MDS Students") + 
+  scale_x_continuous(breaks = seq(1, 7, len = 7) )+
+  facet_wrap(~Location)
+```
+
+###### Figure 3 Distribution of procrastination levels among UBC MDS 2018-2019 cohort 
+
+Interestingly, there is a higher proportion of students that usually study at home who consider themselves as procrastinators. In contrast, the distribution of procrastination levels seems to be more even with students that usually studies at school.
+
+
+Intuitively, we predicted that procrastination level would be correlated with the amount of spare time students have between assignment completion and the submission deadline.
+
+```{r echo = FALSE}
+data %>% 
+ggplot(aes(x = as.factor(ProcrastLV), y = Spare_Time_Min))+
+  geom_jitter(alpha = 0.5, width = 0.25, color = "#082042")+
+  labs(y = "Spare Time (min)",
+       x = "Procrastination Level (7 = extreme procrastinator)",
+       title = "Student's self-acknowledged procrastination level in relation to spare time") +
+  theme_bw()
+
+
+```
+
+###### Figure 4: Procrastination levels in relation to spare time before submission deadline
+
+We did not observe the expected negative relationship between spare time and procrastination level. Students across all categories mainly aggregated around 0 minutes to 500 minutes. However, There is a student with a large amount of spare time in the intermediate procrastination levels (level 3,4,5,6). It is hard to determine at this point whether these students should be considered outliers. But interestingly, procrastination level does not seem to affect the time taken to complete assignments (see below):
+
+```{r echo = FALSE}
+data %>% 
+ggplot(aes(x = as.factor(ProcrastLV), y = Time_On_Lab_Hr))+
+  geom_jitter(alpha = 0.5, width = 0.25, color = "#082042")+
+  labs(y = "Spare Time (min)",
+       x = "Procrastination Level (7 = extreme procrastinator)",
+       title = "Student's self-acknowledged procrastination level in relation to time spent on labs") +
+  theme_bw()
+
+```
+
+###### Figure 5: Distribution of Student's self-acknowledged procrastination leve vs time spent on labs 
+
+#### Study Location
+
+```{r echo = FALSE}
+
+plot_Q1 <- data %>% 
+  ggplot() + geom_bar(aes(x=Location), colour='white', fill = "#082042") +
+  theme_bw() + 
+  labs(x= "Location", y = "Quantity of MDS Students", title = "Amount of MDS Students usual Study Location") 
+plot_Q1
+
+```
+
+###### Figure 6: Distribution of usual study locations among UBC MDS 2018-2019 cohort students
+
+From the graph above, we can see that most of us usually study from home. Furthermore, we identified that `household responsibilities` is a confounding variable to affect the choice of study location. Proceeding further, we wanted to see if people who spent more time on household responsibilities tend to study more from home. 
+
+```{r echo = FALSE}
+plot_Q3 <- data %>% 
+  filter( Household_Hr < 45) %>% 
+  ggplot() + geom_point(aes(x = log(Household_Hr), y= log(Time_On_Lab_Hr), colour = Location), size = 2)  +
+  theme_bw() + 
+  labs(x= "Daily Household Responsibilities (log(hours))", y = "Time Spent on the Labs (log(hours))", title = "Relationship Between Time Spent on Labs versus Household Responsibilities ") + 
+  scale_color_manual(values  = c("#51B1D9", "#082042", "#BFA057"))
+plot_Q3
+
+```
+
+###### Figure 7: Scatterplot of the relationship between daily household responsibilities vs time spent on labs among UBC MDS 2018-2019 cohort students
+
+To give a more clear relationship we took the log scale of both axes, which did not seem to show anything substantial. This was unexpected as we anticipated people with more hours of household responsibilities would tend to study more at home. We also expected those individuals would have to spend less time on labs to accommodate the time required for their household responsibilities
+
+Additionally, we expected travel time from school and to study locations to influence a student's choice of site. As there is only one student that prefer to study in sites outside of school and home, this data is omitted from the following visual analyses. 
+
+```{r echo = FALSE}
+data %>% 
+  filter(Location %in% c("Academic", "Home")) %>% 
+  ggplot(aes(Location, Commute_Hm_Sch_Min))+
+    geom_violin(alpha = 0.3, 
+                fill = "#51B1D9", 
+                color = "#A9A9A9",
+                weight = 0.3,
+                draw_quantiles = c(0.25, 0.5, 0.75))+
+    geom_jitter(width = 0.3, alpha = 0.3)+
+    labs(x = "Preferred Study Location",
+        y = "One-way Commute Time to School (min)",
+        title = "Student's preferred study location in relation to commute time to school")+
+    theme_bw()
+```
+
+###### Figure 8. Distribution of average daily one-way commute time between home and school for different study locations.
+
+We observed that the distribution of travel time for students that prefer studying at home is more much skewed. This indicates that students with extremely long travel times are less likely to study at school, who may be the outliers. Thus, we can estimate the centrality of these distributions with the median, which seems roughly the same among the two groups. Additionally, the IQR of both distributions is very similar. 
+
+```{r echo = FALSE}
+data %>% 
+  filter(Location %in% c("Academic", "Home")) %>% 
+  ggplot(aes(Location, Commute_Stu_Loc_Min))+
+    geom_violin(alpha = 0.3, 
+                fill = "#51B1D9", color = NA)+
+    geom_jitter(width = 0.3, alpha = 0.4, colour = "#082042")+
+    labs(x = "Preferred Study Location",
+        y = "Time taken purposefully to move to study location (min)",
+        title = "Student's preferred study location in relation to extra time taken to move to \nstudy location")+
+    theme_bw()
+```
+
+###### Figure 9. Distribution of average time taken purposefully to travel to study location in relation to the student's usual study locations. 
+
+Interestingly, students that usually study at school, seems to be more likely to take extra time traveling to their study locations. This suggests that a student's tolerant of spending extra time traveling to their usual study spot may be confounding of their choice. It is possible that students that studies at home are less willing to spend time on travel. 
+
+## Conclusion
+
+Our dataset is very imbalanced as we only retrieved one data point for the `Other Settings` variable. In our analysis, we might consider dropping this data point as it could not be representative of the group. In regards to only the `Academic` and `Home` groups, they are relatively balanced with 24 and 34 students respectively. In the above EDA, we found not all variables explored are confounding on the choice of study location or the time spent on assignments. In particular, The EDA suggests that only the tolerance of time spent on traveling and procrastination may have confounding effects.
