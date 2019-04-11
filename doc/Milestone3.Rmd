@@ -53,7 +53,7 @@ For clarity the parameters are defined below:
 
 
 
-```{r,  echo= FALSE, include=FALSE,eval=FALSE}
+```{r,  echo= FALSE, include=FALSE}
 # reading the data into Python or R and creating a summary table
 
 data <- read_csv("../raw_data.csv")
@@ -62,11 +62,13 @@ data <- read_csv("../raw_data.csv")
 ```{r, warning = FALSE, echo= FALSE, include=FALSE}
 # Cleaning and wrangling the data
 #filtering out span and those who did not want to participate
-
-data <- data %>% filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
+data <- data %>% 
+  filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% 
+  mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
          Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) %>% 
       select(Q15, Q2, Q3, Q4,Q16, Q11, Q5, Q18)
-head(data)
+
+
 # adjusting the category types 
 data <- data %>% 
   mutate(Q15 = as.factor(Q15), 
@@ -92,10 +94,6 @@ data <- data %>% rename(Location = Q15,
 
 ```{r echo = FALSE, include = TRUE}
 kable(head(data))
-  
- %>% mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
-         Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) %>% 
-      select(Q15, Q2, Q3, Q4,Q16, Q11, Q5, Q18)
 
 ```
 
