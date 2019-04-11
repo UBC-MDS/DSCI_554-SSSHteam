@@ -37,7 +37,7 @@ The survey was conducted online anonymously during the lab session on April 3rd,
 
 For more details, please see the following:   
 
- *Exporatory Data Analysis can be found in the `doc` folder under [Milestone2](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone2.md)    
+ * Exporatory Data Analysis can be found in the `doc` folder under [Milestone2](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone2.md)    
  * Full Analysis Report is located under [Milestone3](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone3.md)    
 
 #### Data Storage
