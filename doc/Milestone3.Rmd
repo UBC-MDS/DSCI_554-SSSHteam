@@ -65,7 +65,8 @@ data <- read_csv("../raw_data.csv")
 data <- data %>% 
   filter( Status == "IP Address", Q0 == "I agree to participate" ) %>% 
   mutate(Q2 = ifelse(Q2 == "No", 0,  Q2_1_TEXT),
-         Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15)) %>% 
+         Q15 = ifelse(Q15 == "Academic environment (school libraries, lounges, classrooms)", "Academic",  Q15),
+         Q15 = ifelse(Q15 == "Other settings (coffee shops, etc)", "Other",  Q15)) %>% 
       select(Q15, Q2, Q3, Q4,Q16, Q11, Q5, Q18)
 
 
@@ -128,14 +129,29 @@ In our proposal, we identified three confounding variables: procrastination, hou
 
 For comparison, we set up a baseline model by fitting a simple linear model on the dependent variable (Y) - Time spent on labs per week - and the independent variable (X) - the usual study location. Three groups included in the model are: the group who study in the academic settings("academic group"), the group who study at home (the home group) and the person who studies neither at home or at school (the "other" group).  In addition, 95% confidence intervals (CIs)were calculated using the baseline model. From the result below, we can see that the CI of both the home and other groups pass zero, implying that there is no significant difference in the time spent on labs when comparing the home and other groups to the academic group.
 
-(insert Simon's baseline linear model)
+```{r echo = FALSE, include = TRUE}
+lm_base <- lm(Time_On_Lab_Hr ~ Location, data = data)
+lmsum <- summary(lm_base)
+lmsum
+```
 
-(insert Simon's CI)
+```{r echo = FALSE, include = TRUE}
+confint(lm_base)
+```
 
 We then added each confounding variable to the baseline model and refitted the model individually to observe the changes in the coefficients and standard errors. Out of the three confounding variables, we noticed the most significant difference in the coefficient and standard error comes from `commute time to the study location` calculated by the percentage changes. 
 
-(insert Simon's new lm model with the confounding variables)
-(insert Simon's summary on % change )
+```{r echo = FALSE, include = TRUE}
+lmsum_com_stu_loc <- summary(lm(Time_On_Lab_Hr ~ Location + Commute_Stu_Loc_Min, data = data))
+lmsum_com_stu_loc
+```
+
+```{r echo = FALSE, include = TRUE}
+print(paste0("LocationHome's Estimate change (%): ", (lmsum$coefficients[2, 1] - lmsum_com_stu_loc$coefficients[2, 1])/lmsum$coefficients[2, 1]*100, "%"))
+print(paste0("LocationHome's Std. Err. change (%): ", (lmsum$coefficients[2, 2] - lmsum_com_stu_loc$coefficients[2, 2])/lmsum$coefficients[2, 2]*100, "%"))
+print(paste0("LocationOther settings's Estimate change (%): ", (lmsum$coefficients[3, 1] - lmsum_com_stu_loc$coefficients[3, 1])/lmsum$coefficients[3, 1]*100, "%"))
+print(paste0("LocationOther settings's Std. Err. change (%): ", (lmsum$coefficients[3, 2] - lmsum_com_stu_loc$coefficients[3, 2])/lmsum$coefficients[3, 2]*100, "%"))
+```
 
 To make better and more general inferences, we will only focus on the home and academic group in the following section as the other group only represents one individual.
 
