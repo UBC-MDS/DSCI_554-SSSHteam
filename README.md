@@ -5,21 +5,24 @@
 | [Simon Chiu](https://github.com/cheukman1207) | [Sabrina Tse](https://github.com/sabrinatkk) | [Sylvia Lee](https://github.com/LeeYinYing)| [Hayley Boyce](https://github.com/hfboyce)
 |:------------:|:--------------:|:--------------:|:--------------:|
 
-## Research Question 
+## Objective
 
-"Does a person's choice of study location (home/academic setting/other public or private spaces) affect the time you take to finish your assignments (exclusion of optional questions)?"
+The members of our team have various study habits. Some of us live close to school, other live farther away and we all have different preferences when it comes to where we study. We wanted to know if the study location could have an effect on the time an individual takes to complete the weekly labs. Do people who choose to work at home perhaps get more distracted? or do they have more time to commit to the labs since they have no commuting time? To address this question we created a survey to obtain data to conduct our analysis. 
+
+
+#### Research Question 
+
+Our team created the following analysis to address the following research question:
+
+**"Does a person's choice of study location (home/academic setting/other public spaces) affect the time they take to finish their MDS assignments (exclusion of optional questions)?"**
+
 
 ## Project Set Up
 
-* Collaboration Strategy:
+* Collaboration Strategy:  We will be using the standard git branching for contributing to this project repository.
 
-    We will be using the standard git branching for contributing to this project repository.
-
-* Survey Tool:
-
-    UBC Qualtrics:  https://ubc.qualtrics.com
-
-    The server is hosted in Canada.
+* Survey Tool: [UBC Qualtrics](https://ubc.qualtrics.com)   
+  *Note: The server is hosted in Canada.*
 
 * Survey Proposal: [Milestone1](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone1.md)
 
@@ -32,10 +35,12 @@ The survey was conducted online anonymously during the lab session on April 3rd,
 
 ### Post-Survey Analysis
 
-For more details, please click:
+For more details, please see the following:   
 
-[Milestone2](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone2.md)
+ * Exporatory Data Analysis can be found in the `doc` folder under [Milestone2](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone2.md)    
+ * Full Analysis Report is located under [Milestone3](https://github.com/UBC-MDS/DSCI_554-lab-time-analysis/blob/master/doc/Milestone3.md)    
 
 #### Data Storage
 
-the data used for this analysis is store in a private repo given only to those with authorized access. 
+The data used for this analysis is store in a private repo given only to those with authorized access.    
+It is stored [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA)
