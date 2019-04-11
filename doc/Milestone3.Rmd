@@ -100,8 +100,27 @@ kable(head(data))
 
 ## Findings
  
- 
- 
+#### Univariate Analysis 
+
+An important aspect of our analysis is to address the dependent variable. We want to assess if it's acceptable to assume that it approximately follows a normal distribution. 
+
+```{r echo = FALSE}
+data_time <- data %>% filter( ) 
+plot_Q1 <- ggplot(data_time, aes(x = Time_On_Lab_Hr)) + 
+  geom_histogram( bins = 8, colour='white', fill = "#51B1D9")  + 
+  theme_bw() + 
+  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Time spent on labs Among MDS Students") 
+  #scale_x_continuous(breaks = seq(1, 7, len = 7) )
+plot_Q1
+
+```
+
+###### Figure 1: Histogram of Dependent variable- time spend on all labs. 
+
+Althought it is not exact, we beleive the distribution on amount of time spent on labs is roughly normal. If the number of observations increased, we anticipate more normally distributed values. 
+
+
+
 
 ## Conclusions 
 
