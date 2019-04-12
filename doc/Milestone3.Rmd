@@ -161,24 +161,28 @@ The reference point in our model (intercept) is the academic group. On average, 
 
 After we introduced the confounding variable - `commute time to the study location per day` into the picture, the model revealed that the academic group spends 31.6 hours and the home group spends 5.6 hours less compared to the academic group.
 
-From the observed changes, we can infer that the confounding variable indeed influences the relationship between time spent on labs per week and the study locations.  Our findings indicate that the longer time spent on travelling to a specific study location, the longer time the individual has to spend on completing the labs. 
+From the observed changes, we can infer that the confounding variable perhaps influences the relationship between time spent on labs per week and the study locations.  Although the coefficient is still in the specified confidence interval, the variables standard error is very high. This leads us to believe our findings could have a possible positive relationship between the time spent on travelling to a specific study location and the time the individual has to spend on completing the labs.
 
 
 ## Conclusions 
 
+********what did you do well to make this study as causal as possible?******* - sylvia can you address this?
+
+To conclude our analysis, we found that insignificant results to our question "Does a person's choice of study location (home/academic setting/other public spaces) affect the time they take to finish their MDS assignments (exclusion of optional questions)?". With such a small sample size, there was not enough information to conclude a reliable outcome.  Of the 3 confounding variables we anticipated, only the commute time stood out as having a possible effect on the relationship between the study location and the time taken to complete labs. Although in practice the parameter `commute time to the study location per day` was viewed as insignificant, we believe this is due to the large standard error and a small number of observations. As the number of observations increase, we anticipate a lower standard error and thus more evidence to  `commute time to the study location per day` being a confounding variable. 
 
 
 ## Assumptions
 
-We are assuming that all participants responded truthfully and accurately. After performing EDA we are able to make the assumption that our variables are normally distributed and that residuals approximately follow a Normal distribution. We assume all our observations are normally distributed. 
+We are assuming that all participants responded truthfully and accurately. After performing EDA we are able to make the assumption that our variables are normally distributed and that residuals approximately follow a normal distribution. In addition, we assume all our observations are normally distributed. 
 
 ## Limitations
 
 The research we conducted was extremely limited. Our sample size was very small and therefore the ability to conduct causal inference was affected. We also had a single observation for the category "other" in the location parameter. This limited our analysis to addressing mostly the Academic and home locations. Other limitations include the categorization of the locations which included very few options. We could have extended to libraries, study room, and lounges or if people from home worked in an office or not. A major issue we encountered in that the interpretation of the question by the participants was varied. We believe that some of the outliers misread the questions. We had a limitation on candidates itself and potentially the responses could have been inaccurate or a poor representation of actual values since they were was an estimation according to the individuals. 
 
 ## Future Directions
-  In the future, we might suggest conducting a similar analysis on larger samples, particularly undergraduate students, or specific larger classes. After further reflection, we believe age and collaboration with other students could have had confounding effects. Addition analysis could be done assessing if average study times were statistically significant in differing locations. Prediction based analysis instead of causal could also be an area of particular interest. 
-
+  In the future, we might suggest conducting a similar analysis on larger samples, particularly undergraduate students, or specific larger classes. After further reflection, we believe age and collaboration with other students could have had confounding effects. In the future, we could have improved our study design by asking additional questions pertaining to these variables. Addition analysis could be done assessing if average study times were statistically significant in differing locations. Prediction based analysis instead of causal could also be an area of particular interest. 
+  
+  
 ## References 
 
 
