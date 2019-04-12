@@ -19,6 +19,8 @@ Our team created the following analysis to address the following research questi
 
 The members of our team have various study habits. Some of us live close to school, other live farther away and we all have different preferences when it comes to where we study. We wanted to know if the study location could have an effect on the time an individual takes to complete the weekly labs. Do people who choose to work at home perhaps get more distracted? or do they have more time to commit to the labs since they have no commuting time? To address this question we created a survey to obtain data to conduct our analysis. 
 
+To improve on our model, we included several questions to address potential confounding variables such as level of procrastination, time spent on bonus questions, daily household responsibilities and differing commute times. In the analysis, we explored if these variables had an effect on the relationship of study location and the time it takes to complete the labs. 
+
 
 ## Method  
 
