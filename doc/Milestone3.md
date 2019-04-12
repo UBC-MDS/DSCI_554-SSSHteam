@@ -3,8 +3,8 @@ Milestone3
 Simon Chiu, Sabrina Tse, Sylvia Lee, Hayley Boyce
 2019-04-10
 
-Objective
----------
+Objective - Question
+--------------------
 
 Our team created the following analysis to address the following research question:
 
@@ -12,20 +12,20 @@ Our team created the following analysis to address the following research questi
 
 The members of our team have various study habits. Some of us live close to school, other live farther away and we all have different preferences when it comes to where we study. We wanted to know if the study location could have an effect on the time an individual takes to complete the weekly labs. Do people who choose to work at home perhaps get more distracted? or do they have more time to commit to the labs since they have no commuting time? To address this question we created a survey to obtain data to conduct our analysis.
 
-To improve on our model, we included several questions to address potential confounding variables such as level of procrastination, time spent on bonus questions, daily household responsibilities and differing commute times. In the analysis, we explored if these variables had an effect on the relationship of study location and the time it takes to complete the labs.
+Methods
+-------
 
-Method
-------
-
-### Survey
+### Survey/ Survey Design
 
 To reiterate what we discussed in Milestone 2, We conducted an anonymous online survey. Survey link: <https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL>
 
-The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the participants to be UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference.
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the participants to be UBC MDS students in the 2018-2019 cohort since the survey content focused on gathering MDS students' study behaviour and location preference. We attempted to design this survey to address our believed confounding variables. We included several questions to address these potential confounding variables such as level of procrastination, time spent on bonus questions, daily household responsibilities and differing commute times. In the analysis, we explored if these variables had an effect on the relationship of study location and the time it takes to complete the labs. We purposefully did not include any quasi-identifiers to avoid the re-identification of any individuals.
 
 ### The Data
 
-Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. In the pursuit of more accurate results, we tried to reduce the confounding variable of block difficulty by limiting to a specific recently completed block. To keep complete anonymity, we did not collect any data that could be considered as direct or quasi-identifying.
+The data was collected from Qualtrics and exported to a CSV. We suppressed the IP address columns to guarunteed complete anonymity.
+
+Our survey had 59 participants from the MDS program answer questions regarding lab completion times specifically for Block 5. In the pursuit of more accurate results, we tried to reduce the confounding variable of block difficulty by limiting to a specific, recently completed block.
 
 The data is being stored in a private repository only accessible by key personel and those with authorization. It can be located [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA)
 
@@ -107,8 +107,8 @@ For clarity the parameters are defined below:
 | Home     |        0.5|           3|            1.5|                     40|                      60|                 20|              1440|
 | Home     |        0.0|           5|            2.0|                     30|                      10|                 15|              2880|
 
-Findings
---------
+Results
+-------
 
 #### Univariate Analysis
 
@@ -195,8 +195,8 @@ After we introduced the confounding variable - `commute time to the study locati
 
 From the observed changes, we can infer that the confounding variable perhaps influences the relationship between time spent on labs per week and the study locations. Although the coefficient is still in the specified confidence interval, the variables standard error is very high. This leads us to believe our findings could have a possible positive relationship between the time spent on travelling to a specific study location and the time the individual has to spend on completing the labs.
 
-Conclusions
------------
+Discussion
+----------
 
 \*\*\*\*\*\*\*\*what did you do well to make this study as causal as possible?\*\*\*\*\*\*\* - sylvia can you address this?
 
