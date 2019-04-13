@@ -101,7 +101,7 @@ The graph illustrates the relationship between the dependent (time spent on labs
 ```{r echo = FALSE, message = FALSE, results='hide',fig.keep='all'}
 plot_Q <- ggplot(data, aes(Location, Time_On_Lab_Hr))+
   geom_violin(color = NA, fill = "#51B1D9", alpha = 0.3)+
-  geom_jitter(width = 0.3, alpha = 0.3)+ theme_bw()
+  geom_jitter(width = 0.3, alpha = 0.3)+ theme_bw()+
   labs(x = 'Usual Study Location',
        y = 'Average weekly time (hr)',
        title = 'Average weekly time spent on lab assignments in relation to study location')

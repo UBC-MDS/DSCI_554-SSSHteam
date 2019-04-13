@@ -83,7 +83,7 @@ parameters**
 |   `Time_On_Lab_Hr`    | dbl  | Continuous variable  |                                                        the amount of time taken to complete all four labs in hours.                                                         |
 |   `Spare_Time_Min`    | dbl  | Continuous variable  |                                                   the amount of spare time a person has left before the submission time.                                                    |
 
-<br> **Table 1. Sample dataset retrieved from survey
+<br> **Table 2. Sample dataset retrieved from survey
 response**
 
 | Location | OptionalQ | ProcrastLV | Household\_Hr | Commute\_Hm\_Sch\_Min | Commute\_Stu\_Loc\_Min | Time\_On\_Lab\_Hr | Spare\_Time\_Min |

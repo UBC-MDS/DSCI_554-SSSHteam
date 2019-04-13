@@ -41,7 +41,7 @@ We gathered data from 59 participants from the MDS 2018-2019 cohort.
 
 The data is being stored in a private repository only accessible by the core study team and authorized personels. It can be located [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA).
 
-**Table 1. Description of study parameters**  
+###### Table 1. Description of study parameters  
 
 |Parameter             | type    | variable type | description                                     |
 |:----------------------:|:--------:|:------:|:------------------------------------------------:|
@@ -96,7 +96,8 @@ data <- data %>% rename(Location = Q15,
 ```
 
 <br>
-**Table 1. Sample dataset retrieved from survey response**
+
+###### Table 2. Sample dataset retrieved from survey response
 
 ```{r echo = FALSE, include = TRUE}
 kable(head(data))
@@ -104,34 +105,59 @@ kable(head(data))
 ```
 
 ## Findings
- 
-#### Univariate Analysis 
 
-An important aspect of our analysis is to address the dependent variable. We want to assess if it's acceptable to assume that it approximately follows a normal distribution. 
+###### Table 3. Count of students that prefer each study location
+
+```{r echo=FALSE}
+kable(data %>% group_by(Location) %>% summarize(n = n()))
+```
+
+We found that 24 students usually study in an academic setting, while 34 students prefer to study at home (Table 3.). We had one students that selected "other" study settings, we omitted the "other" location category from the rest of the analysis as it is not representative. 
+
+ 
+#### EDA Analysis 
 
 ```{r echo = FALSE}
-data_time <- data %>% filter( ) 
-plot_Q1 <- ggplot(data_time, aes(x = Time_On_Lab_Hr)) + 
+data_filter <- data %>% filter(Location != 'Other') 
+
+plot_Q1 <- ggplot(data_filter, aes(x = Time_On_Lab_Hr)) + 
   geom_histogram( bins = 8, colour='white', fill = "#51B1D9")  + 
   theme_bw() + 
-  labs(x= "Level of Procrastination", y = "Frequency", title = "Distribution of Time spent on labs Among MDS Students") 
-  #scale_x_continuous(breaks = seq(1, 7, len = 7) )
+  labs(x= "Weekly average time (hours)", y = "Frequency", title = "Distribution of Time spent on labs Among MDS Students") +
+  facet_wrap(~Location)
+
 plot_Q1
 
 ```
 
-###### Figure 1: Histogram of Dependent variable- time spend on all labs. 
+###### Figure 1: Histogram of weekly average time spent on all labs in Block 5. 
 
-Althought it is not exact, we beleive the distribution on amount of time spent on labs is roughly normal. If the number of observations increased, we anticipate more normally distributed values. 
+Althought it is not exact, the distribution on amount of time spent on labs are roughly normal for both groups (Figure 1.). If the number of observations increased, we anticipate more normally distributed values. Given the small dataset, it seems to be reasonable to assume normality for both groups given the above histogram.
 
+```{r echo = FALSE}
+data_filter %>% ggplot(aes(Location, Time_On_Lab_Hr))+
+  geom_violin(alpha = 0.3, 
+                fill = "#51B1D9", 
+                color = "#A9A9A9",
+                weight = 0.3,
+                draw_quantiles = c(0.25, 0.5, 0.75))+
+  geom_jitter(width = 0.3, alpha = 0.3)+
+  labs(x = 'Usual Study Location',
+       y = 'Average weekly time (hr)',
+       title = 'Average weekly time spent on lab assignments in relation to study location')
+```
+
+###### Figure 2: Average weekly time spent on labs in relation to the student's preferred study locations.
+
+There is a larger range of time spent on labs by students whom study at school (Figure 2). The data appear much more spares and seem to have higher values which could be an indication that either people are getting distracted at school or people generally put more effort into the assignments. As seen in Figure 2, the sample distribution of the 'academic' group seems to have a greater skew then the sample distribution of students who study at home. Without addressing confounders, the centrality of the two distributions is very similar, which seems to suggest location has minimal effects on lab completion time.  
 
 ### Confounding Variables
 
-In our proposal, we identified three confounding variables: procrastination, household responsibilities and the commute time to the study location. In this milestone, we will focus on determining the existence of the causal effects of these confounding variables. 
+In our proposal, we identified three confounding variables: procrastination, household responsibilities and the commute time to the study location. We first conducted statistical tests to determine confounding effects of these variables. 
 
 #### Comparison - Baseline set-up
 
-For comparison, we set up a baseline model by fitting a simple linear model on the dependent variable (Y) - Time spent on labs per week - and the independent variable (X) - the usual study location. Three groups included in the model are: the group who study in the academic settings("academic group"), the group who study at home (the home group) and the person who studies neither at home or at school (the "other" group).  In addition, 95% confidence intervals (CIs)were calculated using the baseline model. From the result below, we can see that the CI of both the home and other groups pass zero, implying that there is no significant difference in the time spent on labs when comparing the home and other groups to the academic group.
+For comparison, we set up a baseline model by fitting a simple linear model on the dependent variable (Y) - Time spent on labs per week - and the independent variable (X) - the usual study location. Three groups included in the model are: the group who study in the academic settings("academic group"), the group who study at home (the home group) and the person who studies neither at home or at school (the "other" group).  In addition, 95% confidence intervals (CIs) were calculated using the baseline model. From the result below, we can see that the CI of both the home and other groups pass zero, implying that there is no significant difference in the time spent on labs when comparing the home and other groups to the academic group.
 
 ```{r echo = FALSE, include = TRUE}
 lm_base <- lm(Time_On_Lab_Hr ~ Location, data = data)
