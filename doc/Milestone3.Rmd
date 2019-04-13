@@ -11,7 +11,7 @@ library(tidyverse)
 library(knitr)
 ```
 
-## Objective 
+## Objective - Question 
 
 Our team created the following analysis to address the following research question:
 
@@ -22,22 +22,24 @@ Labs assignments comprise a big part of the Master of Data Science program. One 
 In the broader context, the completion and the quality of the lab assignments is crucial to a student's success in the program. This study is the beginning of accessing and exploring how external variables affects a student's enjoyment during the program and the amount of knowledge that they take away from the program. Exploration of these variables is worthwhile in developing strategies to help student succeed and improve the quality of the MDS program.  
 
 
-## Method  
 
-### Survey
+## Methods  
+
+### Survey/ Survey Design
 
 To reiterate what we discussed in  Milestone 2, We conducted an anonymous online survey via Quatrics, a survey platform hosted by UBC. 
 
 Survey link: https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL
 
-The survey was conducted online anonymously during the lab session on April 3rd, 2019.  We expected that most of the participants to be UBC MDS students in the 2018-2019 cohort as the distribution was via the Slack channel for DSCI 554 course. The survey content focused on gathering MDS students' study behaviour and location preference in block 5. We limited the study scope to a specific recently completed block in the attempt to reduce the confounding variable of block difficulty. In the pursuit of more accurate results, we identified and addressed plausible confounding variables including commute time, procrastination tendencies, household responsibilities, and the completion of optional questions as part of the survey.  
+The survey was conducted online anonymously during the lab session on April 3rd, 2019. We expected that most of the participants to be UBC MDS students in the 2018-2019 cohort as the distribution was via the Slack channel for DSCI 554 course. The survey content focused on gathering MDS students' study behaviour and location preference in block 5. We limited the study scope to a specific recently completed block in the attempt to reduce the confounding variable of block difficulty. In the pursuit of more accurate results, we identified and addressed plausible confounding variables including commute time, procrastination tendencies, household responsibilities, and the completion of optional questions as part of the survey.  
+
 
 In compliance to the [UBC Office of Research Ethics document on Using Online Surveys](https://ethics.research.ubc.ca/sites/ore.ubc.ca/files/documents/Online_Survey-GN.pdf), we did not collect any data that could be considered as direct or quasi-identifying to ensure the participants' anonymity. Additionally, the data is not available to the public. 
 
 
 ### The Data 
 
-We gathered data from 59 participants from the MDS 2018-2019 cohort. 
+We gathered data from 59 participants from the MDS 2018-2019 cohort. The data collected from Qualtrics was exported to a CSV for analysis. We suppressed the IP address columns to guarunteed complete anonymity.  
 
 The data is being stored in a private repository only accessible by the core study team and authorized personels. It can be located [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA).
 
@@ -104,7 +106,7 @@ kable(head(data))
 
 ```
 
-## Findings
+## Results
 
 ###### Table 3. Count of students that prefer each study location
 
@@ -153,7 +155,7 @@ There is a larger range of time spent on labs by students whom study at school (
 
 ### Confounding Variables
 
-In our proposal, we identified three confounding variables: procrastination, household responsibilities and the commute time to the study location. We first conducted statistical tests to determine confounding effects of these variables. 
+In the beginning of our study, we identified three confounding variables: procrastination, household responsibilities and the commute time to the study location. We first conducted statistical tests to determine confounding effects of these variables. 
 
 #### Comparison - Baseline set-up
 
@@ -191,24 +193,28 @@ The reference point in our model (intercept) is the academic group. On average, 
 
 After we introduced the confounding variable - `commute time to the study location per day` into the picture, the model revealed that the academic group spends 31.6 hours and the home group spends 5.6 hours less compared to the academic group.
 
-From the observed changes, we can infer that the confounding variable indeed influences the relationship between time spent on labs per week and the study locations.  Our findings indicate that the longer time spent on travelling to a specific study location, the longer time the individual has to spend on completing the labs. 
+From the observed changes, we can infer that the confounding variable perhaps influences the relationship between time spent on labs per week and the study locations.  Although the coefficient is still in the specified confidence interval, the variables standard error is very high. This leads us to believe our findings could have a possible positive relationship between the time spent on travelling to a specific study location and the time the individual has to spend on completing the labs.
 
 
-## Conclusions 
+## Discussion 
 
+********what did you do well to make this study as causal as possible?******* - sylvia can you address this?
+
+To conclude our analysis, we found that insignificant results to our question "Does a person's choice of study location (home/academic setting/other public spaces) affect the time they take to finish their MDS assignments (exclusion of optional questions)?". With such a small sample size, there was not enough information to conclude a reliable outcome.  Of the 3 confounding variables we anticipated, only the commute time stood out as having a possible effect on the relationship between the study location and the time taken to complete labs. Although in practice the parameter `commute time to the study location per day` was viewed as insignificant, we believe this is due to the large standard error and a small number of observations. As the number of observations increase, we anticipate a lower standard error and thus more evidence to  `commute time to the study location per day` being a confounding variable. 
 
 
 ## Assumptions
 
-We are assuming that all participants responded truthfully and accurately. After performing EDA we are able to make the assumption that our variables are normally distributed and that residuals approximately follow a Normal distribution. We assume all our observations are normally distributed. 
+We are assuming that all participants responded truthfully and accurately. After performing EDA we are able to make the assumption that our variables are normally distributed and that residuals approximately follow a normal distribution. In addition, we assume all our observations are normally distributed. 
 
 ## Limitations
 
 The research we conducted was extremely limited. Our sample size was very small and therefore the ability to conduct causal inference was affected. We also had a single observation for the category "other" in the location parameter. This limited our analysis to addressing mostly the Academic and home locations. Other limitations include the categorization of the locations which included very few options. We could have extended to libraries, study room, and lounges or if people from home worked in an office or not. A major issue we encountered in that the interpretation of the question by the participants was varied. We believe that some of the outliers misread the questions. We had a limitation on candidates itself and potentially the responses could have been inaccurate or a poor representation of actual values since they were was an estimation according to the individuals. 
 
 ## Future Directions
-  In the future, we might suggest conducting a similar analysis on larger samples, particularly undergraduate students, or specific larger classes. After further reflection, we believe age and collaboration with other students could have had confounding effects. Addition analysis could be done assessing if average study times were statistically significant in differing locations. Prediction based analysis instead of causal could also be an area of particular interest. 
-
+  In the future, we might suggest conducting a similar analysis on larger samples, particularly undergraduate students, or specific larger classes. After further reflection, we believe age and collaboration with other students could have had confounding effects. In the future, we could have improved our study design by asking additional questions pertaining to these variables. Addition analysis could be done assessing if average study times were statistically significant in differing locations. Prediction based analysis instead of causal could also be an area of particular interest. 
+  
+  
 ## References 
 
 

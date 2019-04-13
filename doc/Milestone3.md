@@ -3,7 +3,7 @@ Milestone3
 Simon Chiu, Sabrina Tse, Sylvia Lee, Hayley Boyce
 2019-04-10
 
-## Objective
+## Objective - Question
 
 Our team created the following analysis to address the following
 research question:
@@ -33,9 +33,9 @@ knowledge that they take away from the program. Exploration of these
 variables is worthwhile in developing strategies to help student succeed
 and improve the quality of the MDS program.
 
-## Method
+## Methods
 
-### Survey
+### Survey/ Survey Design
 
 To reiterate what we discussed in Milestone 2, We conducted an anonymous
 online survey via Quatrics, a survey platform hosted by UBC.
@@ -63,14 +63,15 @@ the data is not available to the public.
 
 ### The Data
 
-We gathered data from 59 participants from the MDS 2018-2019 cohort.
+We gathered data from 59 participants from the MDS 2018-2019 cohort. The
+data collected from Qualtrics was exported to a CSV for analysis. We
+suppressed the IP address columns to guarunteed complete anonymity.
 
 The data is being stored in a private repository only accessible by the
 core study team and authorized personels. It can be located
 [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA).
 
-**Table 1. Description of study
-parameters**
+###### Table 1. Description of study parameters
 
 |       Parameter       | type |    variable type     |                                                                                 description                                                                                 |
 | :-------------------: | :--: | :------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -83,8 +84,9 @@ parameters**
 |   `Time_On_Lab_Hr`    | dbl  | Continuous variable  |                                                        the amount of time taken to complete all four labs in hours.                                                         |
 |   `Spare_Time_Min`    | dbl  | Continuous variable  |                                                   the amount of spare time a person has left before the submission time.                                                    |
 
-<br> **Table 2. Sample dataset retrieved from survey
-response**
+<br>
+
+###### Table 2. Sample dataset retrieved from survey response
 
 | Location | OptionalQ | ProcrastLV | Household\_Hr | Commute\_Hm\_Sch\_Min | Commute\_Stu\_Loc\_Min | Time\_On\_Lab\_Hr | Spare\_Time\_Min |
 | :------- | --------: | ---------: | ------------: | --------------------: | ---------------------: | ----------------: | ---------------: |
@@ -95,29 +97,56 @@ response**
 | Home     |       0.5 |          3 |           1.5 |                    40 |                     60 |                20 |             1440 |
 | Home     |       0.0 |          5 |           2.0 |                    30 |                     10 |                15 |             2880 |
 
-## Findings
+## Results
 
-#### Univariate Analysis
+###### Table 3. Count of students that prefer each study location
 
-An important aspect of our analysis is to address the dependent
-variable. We want to assess if it’s acceptable to assume that it
-approximately follows a normal
-distribution.
+| Location |  n |
+| :------- | -: |
+| Academic | 24 |
+| Home     | 34 |
+| Other    |  1 |
 
-![](Milestone3_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+We found that 24 students usually study in an academic setting, while 34
+students prefer to study at home (Table 3.). We had one students that
+selected “other” study settings, we omitted the “other” location
+category from the rest of the analysis as it is not
+representative.
 
-###### Figure 1: Histogram of Dependent variable- time spend on all labs.
+#### EDA Analysis
 
-Althought it is not exact, we beleive the distribution on amount of time
-spent on labs is roughly normal. If the number of observations
-increased, we anticipate more normally distributed values.
+![](Milestone3_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+###### Figure 1: Histogram of weekly average time spent on all labs in Block 5.
+
+Althought it is not exact, the distribution on amount of time spent on
+labs are roughly normal for both groups (Figure 1.). If the number of
+observations increased, we anticipate more normally distributed values.
+Given the small dataset, it seems to be reasonable to assume normality
+for both groups given the above
+histogram.
+
+![](Milestone3_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+###### Figure 2: Average weekly time spent on labs in relation to the student’s preferred study locations.
+
+There is a larger range of time spent on labs by students whom study at
+school (Figure 2). The data appear much more spares and seem to have
+higher values which could be an indication that either people are
+getting distracted at school or people generally put more effort into
+the assignments. As seen in Figure 2, the sample distribution of the
+‘academic’ group seems to have a greater skew then the sample
+distribution of students who study at home. Without addressing
+confounders, the centrality of the two distributions is very similar,
+which seems to suggest location has minimal effects on lab completion
+time.
 
 ### Confounding Variables
 
-In our proposal, we identified three confounding variables:
-procrastination, household responsibilities and the commute time to the
-study location. In this milestone, we will focus on determining the
-existence of the causal effects of these confounding variables.
+In the beginning of our study, we identified three confounding
+variables: procrastination, household responsibilities and the commute
+time to the study location. We first conducted statistical tests to
+determine confounding effects of these variables.
 
 #### Comparison - Baseline set-up
 
@@ -127,7 +156,7 @@ the independent variable (X) - the usual study location. Three groups
 included in the model are: the group who study in the academic
 settings(“academic group”), the group who study at home (the home
 group) and the person who studies neither at home or at school (the
-“other” group). In addition, 95% confidence intervals (CIs)were
+“other” group). In addition, 95% confidence intervals (CIs) were
 calculated using the baseline model. From the result below, we can see
 that the CI of both the home and other groups pass zero, implying that
 there is no significant difference in the time spent on labs when
@@ -211,20 +240,41 @@ academic group spends 31.6 hours and the home group spends 5.6 hours
 less compared to the academic group.
 
 From the observed changes, we can infer that the confounding variable
-indeed influences the relationship between time spent on labs per week
-and the study locations. Our findings indicate that the longer time
-spent on travelling to a specific study location, the longer time the
-individual has to spend on completing the labs.
+perhaps influences the relationship between time spent on labs per week
+and the study locations. Although the coefficient is still in the
+specified confidence interval, the variables standard error is very
+high. This leads us to believe our findings could have a possible
+positive relationship between the time spent on travelling to a specific
+study location and the time the individual has to spend on completing
+the labs.
 
-## Conclusions
+## Discussion
+
+\*\*\*\*\*\*\*\*what did you do well to make this study as causal as
+possible?\*\*\*\*\*\*\* - sylvia can you address this?
+
+To conclude our analysis, we found that insignificant results to our
+question “Does a person’s choice of study location (home/academic
+setting/other public spaces) affect the time they take to finish their
+MDS assignments (exclusion of optional questions)?”. With such a small
+sample size, there was not enough information to conclude a reliable
+outcome. Of the 3 confounding variables we anticipated, only the commute
+time stood out as having a possible effect on the relationship between
+the study location and the time taken to complete labs. Although in
+practice the parameter `commute time to the study location per day` was
+viewed as insignificant, we believe this is due to the large standard
+error and a small number of observations. As the number of observations
+increase, we anticipate a lower standard error and thus more evidence to
+`commute time to the study location per day` being a confounding
+variable.
 
 ## Assumptions
 
 We are assuming that all participants responded truthfully and
 accurately. After performing EDA we are able to make the assumption that
 our variables are normally distributed and that residuals approximately
-follow a Normal distribution. We assume all our observations are
-normally distributed.
+follow a normal distribution. In addition, we assume all our
+observations are normally distributed.
 
 ## Limitations
 
@@ -247,9 +297,11 @@ were was an estimation according to the individuals.
 In the future, we might suggest conducting a similar analysis on larger
 samples, particularly undergraduate students, or specific larger
 classes. After further reflection, we believe age and collaboration with
-other students could have had confounding effects. Addition analysis
-could be done assessing if average study times were statistically
-significant in differing locations. Prediction based analysis instead of
-causal could also be an area of particular interest.
+other students could have had confounding effects. In the future, we
+could have improved our study design by asking additional questions
+pertaining to these variables. Addition analysis could be done assessing
+if average study times were statistically significant in differing
+locations. Prediction based analysis instead of causal could also be an
+area of particular interest.
 
 ## References
