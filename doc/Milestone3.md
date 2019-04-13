@@ -12,43 +12,65 @@ research question:
 public spaces) affect the time they take to finish their MDS assignments
 (exclusion of optional questions)?”**
 
-The members of our team have various study habits. Some of us live close
-to school, other live farther away and we all have different preferences
-when it comes to where we study. We wanted to know if the study location
-could have an effect on the time an individual takes to complete the
-weekly labs. Do people who choose to work at home perhaps get more
-distracted? or do they have more time to commit to the labs since they
-have no commuting time? To address this question we created a survey to
-obtain data to conduct our analysis.
+Labs assignments comprise a big part of the Master of Data Science
+program. One characteristic of this program is the diversity of students
+that are enrolled in it. As students in this program, some of us live
+close to school, other live farther away and we all have different
+preferences when it comes to where we study. Consequentially, the
+members of our team have various study habits. As part of this study, we
+investigated if the choice of study location has an effect on the time a
+student takes to complete the weekly labs. Do people who choose to work
+at home perhaps get more distracted? or do they have more time to commit
+to the labs since they have less commuting time? To address this
+question we surveyed students in the 2018-2019 MDS cohort to obtain data
+to conduct our analysis.
+
+In the broader context, the completion and the quality of the lab
+assignments is crucial to a student’s success in the program. This study
+is the beginning of accessing and exploring how external variables
+affects a student’s enjoyment during the program and the amount of
+knowledge that they take away from the program. Exploration of these
+variables is worthwhile in developing strategies to help student succeed
+and improve the quality of the MDS program.
 
 ## Method
 
 ### Survey
 
 To reiterate what we discussed in Milestone 2, We conducted an anonymous
-online survey. Survey link:
-<https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL>
+online survey via Quatrics, a survey platform hosted by UBC.
+
+Survey link: <https://ubc.ca1.qualtrics.com/jfe/form/SV_agz0I9HiBEeZqBL>
 
 The survey was conducted online anonymously during the lab session on
 April 3rd, 2019. We expected that most of the participants to be UBC MDS
-students in the 2018-2019 cohort since the survey content focused on
-gathering MDS students’ study behaviour and location preference.
+students in the 2018-2019 cohort as the distribution was via the Slack
+channel for DSCI 554 course. The survey content focused on gathering MDS
+students’ study behaviour and location preference in block 5. We limited
+the study scope to a specific recently completed block in the attempt to
+reduce the confounding variable of block difficulty. In the pursuit of
+more accurate results, we identified and addressed plausible confounding
+variables including commute time, procrastination tendencies, household
+responsibilities, and the completion of optional questions as part of
+the survey.
+
+In compliance to the [UBC Office of Research Ethics document on Using
+Online
+Surveys](https://ethics.research.ubc.ca/sites/ore.ubc.ca/files/documents/Online_Survey-GN.pdf),
+we did not collect any data that could be considered as direct or
+quasi-identifying to ensure the participants’ anonymity. Additionally,
+the data is not available to the public.
 
 ### The Data
 
-Our survey had 59 participants from the MDS program answer questions
-regarding lab completion times specifically for Block 5. In the pursuit
-of more accurate results, we tried to reduce the confounding variable of
-block difficulty by limiting to a specific recently completed block. To
-keep complete anonymity, we did not collect any data that could be
-considered as direct or quasi-identifying.
+We gathered data from 59 participants from the MDS 2018-2019 cohort.
 
-The data is being stored in a private repository only accessible by key
-personel and those with authorization. It can be located
-[here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA)
+The data is being stored in a private repository only accessible by the
+core study team and authorized personels. It can be located
+[here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA).
 
-For clarity the parameters are defined
-below:
+**Table 1. Description of study
+parameters**
 
 |       Parameter       | type |    variable type     |                                                                                 description                                                                                 |
 | :-------------------: | :--: | :------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -60,6 +82,9 @@ below:
 | `Commute_Stu_Loc_Min` | dbl  | Continuous variable  |                                                the amount of time it takes to move to their usual study location in minutes.                                                |
 |   `Time_On_Lab_Hr`    | dbl  | Continuous variable  |                                                        the amount of time taken to complete all four labs in hours.                                                         |
 |   `Spare_Time_Min`    | dbl  | Continuous variable  |                                                   the amount of spare time a person has left before the submission time.                                                    |
+
+<br> **Table 1. Sample dataset retrieved from survey
+response**
 
 | Location | OptionalQ | ProcrastLV | Household\_Hr | Commute\_Hm\_Sch\_Min | Commute\_Stu\_Loc\_Min | Time\_On\_Lab\_Hr | Spare\_Time\_Min |
 | :------- | --------: | ---------: | ------------: | --------------------: | ---------------------: | ----------------: | ---------------: |
