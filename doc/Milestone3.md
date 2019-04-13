@@ -152,121 +152,150 @@ determine confounding effects of these variables.
 
 For comparison, we set up a baseline model by fitting a simple linear
 model on the dependent variable (Y) - Time spent on labs per week - and
-the independent variable (X) - the usual study location. Three groups
-included in the model are: the group who study in the academic
-settings(“academic group”), the group who study at home (the home
-group) and the person who studies neither at home or at school (the
-“other” group). In addition, 95% confidence intervals (CIs) were
-calculated using the baseline model. From the result below, we can see
-that the CI of both the home and other groups pass zero, implying that
-there is no significant difference in the time spent on labs when
-comparing the home and other groups to the academic group.
+the independent variable (X) - the usual study location. Two groups were
+included in the model: the group who study in the academic
+settings(“academic group”) and the group who study at home (the “home”
+group).
+
+The reference point in our model (intercept) is the academic group. On
+average, this group spends 28.7 hours per week on labs; The group who
+study at home (the ‘home’ group) comparatively spend 4.4 hours less.
+However, the difference is not significantly different from 0 (p-value
+\< 0.05) (Model 1.). The statistic conheres with the 95% confidence
+interval (CIs) of the intercept and slope parameters. In the baseline
+model, the CI of the slope parameter passes 0, which implying that there
+is no significant difference in the time spent on labs when comparing
+the home to the academic group (Table 4.).
+
+###### Model 1. Baseline model with no confounders addressed
 
     ## 
     ## Call:
-    ## lm(formula = Time_On_Lab_Hr ~ Location, data = data)
+    ## lm(formula = Time_On_Lab_Hr ~ Location, data = data_filter)
     ## 
     ## Residuals:
     ##     Min      1Q  Median      3Q     Max 
-    ## -24.792 -11.292  -4.382   8.118  56.208 
+    ## -24.792 -11.542  -4.382   9.368  56.208 
     ## 
     ## Coefficients:
-    ##               Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)     28.792      3.368   8.550 9.72e-12 ***
-    ## LocationHome    -4.409      4.398  -1.002    0.320    
-    ## LocationOther  -23.792     16.838  -1.413    0.163    
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)    28.792      3.368   8.550 9.72e-12 ***
+    ## LocationHome   -4.409      4.398  -1.002     0.32    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Residual standard error: 16.5 on 56 degrees of freedom
-    ## Multiple R-squared:  0.04485,    Adjusted R-squared:  0.01073 
-    ## F-statistic: 1.315 on 2 and 56 DF,  p-value: 0.2767
+    ## Multiple R-squared:  0.01763,    Adjusted R-squared:  8.708e-05 
+    ## F-statistic: 1.005 on 1 and 56 DF,  p-value: 0.3204
 
-    ##                   2.5 %    97.5 %
-    ## (Intercept)    22.04554 35.537791
-    ## LocationHome  -13.22039  4.401760
-    ## LocationOther -57.52229  9.938953
+###### Table 4. Two-tailed 95% CI of slope and intercept from baseline model (Model 1.)
+
+    ##                  2.5 %   97.5 %
+    ## (Intercept)   22.04554 35.53779
+    ## LocationHome -13.22039  4.40176
 
 We then added each confounding variable to the baseline model and
 refitted the model individually to observe the changes in the
 coefficients and standard errors. Out of the three confounding
 variables, we noticed the most significant difference in the coefficient
 and standard error comes from `commute time to the study location`
-calculated by the percentage changes.
+calculated by the percentage changes (Model
+2.).
+
+#### The influence of commute time to the study location
+
+###### Model 2. Additive model including commute time to study location as confounder
 
     ## 
     ## Call:
     ## lm(formula = Time_On_Lab_Hr ~ Location + Commute_Stu_Loc_Min, 
-    ##     data = data)
+    ##     data = data_filter)
     ## 
     ## Residuals:
     ##     Min      1Q  Median      3Q     Max 
-    ## -25.819 -11.040  -4.819   9.139  55.181 
+    ## -25.819 -11.050  -4.819   9.239  55.181 
     ## 
     ## Coefficients:
     ##                     Estimate Std. Error t value Pr(>|t|)    
     ## (Intercept)          31.6186     4.2401   7.457 6.73e-10 ***
     ## LocationHome         -5.5583     4.5146  -1.231    0.223    
-    ## LocationOther       -21.2197    16.9721  -1.250    0.216    
     ## Commute_Stu_Loc_Min  -0.1800     0.1645  -1.094    0.279    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Residual standard error: 16.47 on 55 degrees of freedom
-    ## Multiple R-squared:  0.06519,    Adjusted R-squared:  0.0142 
-    ## F-statistic: 1.278 on 3 and 55 DF,  p-value: 0.2909
+    ## Multiple R-squared:  0.03855,    Adjusted R-squared:  0.003588 
+    ## F-statistic: 1.103 on 2 and 55 DF,  p-value: 0.3392
 
-    ## [1] "LocationHome's Estimate change (%): -26.0591678290926%"
+    ## [1] "Estimate % change in slope coefficient: -26.0591678290924%"
 
-    ## [1] "LocationHome's Std. Err. change (%): -2.64127931368118%"
-
-    ## [1] "LocationOther settings's Estimate change (%): 10.8104056412573%"
-
-    ## [1] "LocationOther settings's Std. Err. change (%): -0.796550454456704%"
-
-To make better and more general inferences, we will only focus on the
-home and academic group in the following section as the other group only
-represents one individual.
-
-#### The causal influence of commute time to the study location
-
-The reference point in our model (intercept) is the academic group. On
-average, this group spends 28.7 hours per week on labs; The group who
-study at home (the ‘home’ group) comparatively spend 4.4 hours less.
+    ## [1] "Estimate % change in Standard Error of coefficient: -2.64127931368116%"
 
 After we introduced the confounding variable - `commute time to the
 study location per day` into the picture, the model revealed that the
 academic group spends 31.6 hours and the home group spends 5.6 hours
-less compared to the academic group.
+less compared to the academic group (Model 2.). However, the difference
+between the academic group and home group is not significantly different
+(p-value \< 0.05).
 
-From the observed changes, we can infer that the confounding variable
-perhaps influences the relationship between time spent on labs per week
-and the study locations. Although the coefficient is still in the
-specified confidence interval, the variables standard error is very
-high. This leads us to believe our findings could have a possible
-positive relationship between the time spent on travelling to a specific
-study location and the time the individual has to spend on completing
-the labs.
+From the observed changes, There is not enough evidence that the
+confounding variable influences the relationship between time spent on
+labs per week and the study locations as the addition of the confounder
+did not change the statistical conclusions. As the standard error of the
+slope coefficient was not significantly different between Model 1. and
+Model 2., it suggests that the commute time to study location did not
+help explain the variation in the data. Furthermore, there is no
+sigificant correlation between commute time and lab completion time
+(p-value \< 0.05) (Model 2.).
 
 ## Discussion
 
-\*\*\*\*\*\*\*\*what did you do well to make this study as causal as
-possible?\*\*\*\*\*\*\* - sylvia can you address this?
+“I study better at school”, “I get too distracted when I am at home”, or
+“I can get more help at school” are often phrases that we hear from
+students. We often associate academic settings as better learning
+environment due to the atmosphere and proximity of resources available
+to students. In this study, we looked at the MDS 2018-2019 cohort to
+investigate whether the assumption is supported by statistical evidence.
 
-To conclude our analysis, we found that insignificant results to our
-question “Does a person’s choice of study location (home/academic
-setting/other public spaces) affect the time they take to finish their
-MDS assignments (exclusion of optional questions)?”. With such a small
-sample size, there was not enough information to conclude a reliable
-outcome. Of the 3 confounding variables we anticipated, only the commute
-time stood out as having a possible effect on the relationship between
-the study location and the time taken to complete labs. Although in
-practice the parameter `commute time to the study location per day` was
-viewed as insignificant, we believe this is due to the large standard
-error and a small number of observations. As the number of observations
-increase, we anticipate a lower standard error and thus more evidence to
-`commute time to the study location per day` being a confounding
-variable.
+In this observational study, we tried to establish as much causality as
+possible by collecting information on factors that may influence the
+dependent variable (lab completion time) and independent variable (study
+location). Given the time and resources available, we cannot address all
+the possible confounders. Therefore, we selected few key confounders
+that we anticipate to have larger effects on our variables. Our study
+accounted for major factors that may affect a student’s choice of
+location includes commute time to school, commute to study location and
+household responsibilities. Similarly, factors that may affect lab
+completion time included completion of optional questions and extent of
+procrastination. We treated these influential factors as possible
+confounders in our analysis. We assessed each confounder through EDA and
+evaluation of their respective coefficents in the regression model.
+
+Out of all the confounding variables considered, only the commute time
+stood out as having a plausible effect on the relationship between study
+locations and the time taken to complete labs. Although statistical
+tests concluded the parameter `commute time to the study location per
+day` is not significant, there stands a possibility of error due to the
+large standard error observed and the small sample size in this study.
+As the number of observations increase, we anticipate a lower standard
+error and perhaps more evidence to `commute time to the study location
+per day` being a confounding variable.
+
+We used lab completion time as a proxy for assessing whether the study
+environment affects effective learning. Our study question was “Does a
+person’s choice of study location (home/academic setting/other public
+spaces) affect the time they take to finish their MDS assignments
+(exclusion of optional questions)?”, and we found that the study
+locations does not significantly affects the students’ average lab
+completion time. The results suggest that easy access to academic
+settings does not provide significant advantages to students. The
+observed result may also be due to the characteristic of our sample. All
+MDS students had experienced at least one degree of higher education.
+Most students’ study style would have been developed by the time of
+study. Thus, it can be inferred that MDS student’s may already know from
+experience what kind of environment they work best under. This may
+explain the similar approximate normal distribution of time spent on
+labs among the ‘academic’ group and the ‘home’ group.
 
 ## Assumptions
 
@@ -297,11 +326,9 @@ were was an estimation according to the individuals.
 In the future, we might suggest conducting a similar analysis on larger
 samples, particularly undergraduate students, or specific larger
 classes. After further reflection, we believe age and collaboration with
-other students could have had confounding effects. In the future, we
-could have improved our study design by asking additional questions
-pertaining to these variables. Addition analysis could be done assessing
-if average study times were statistically significant in differing
-locations. Prediction based analysis instead of causal could also be an
-area of particular interest.
-
-## References
+other students could have had confounding effects. We could improvise
+our study design by asking additional questions pertaining to these
+variables. Addition analysis may include assessing if average study
+times were statistically significant in differing locations. Prediction
+based analysis instead of causal could also be an area of particular
+interest.
