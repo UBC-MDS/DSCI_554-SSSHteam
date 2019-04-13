@@ -15,7 +15,7 @@ public spaces) affect the time they take to finish their MDS assignments
 Labs assignments comprise a big part of the Master of Data Science
 program. One characteristic of this program is the diversity of students
 that are enrolled in it. As students in this program, some of us live
-close to school, other live farther away and we all have different
+close to school, others live farther away and we all have different
 preferences when it comes to where we study. Consequentially, the
 members of our team have various study habits. As part of this study, we
 investigated if the choice of study location has an effect on the time a
@@ -26,12 +26,12 @@ question we surveyed students in the 2018-2019 MDS cohort to obtain data
 to conduct our analysis.
 
 In the broader context, the completion and the quality of the lab
-assignments is crucial to a student’s success in the program. This study
-is the beginning of accessing and exploring how external variables
+assignments are crucial to a student’s success in the program. This
+study is the beginning of accessing and exploring how external variables
 affects a student’s enjoyment during the program and the amount of
 knowledge that they take away from the program. Exploration of these
-variables is worthwhile in developing strategies to help student succeed
-and improve the quality of the MDS program.
+variables is worthwhile in developing strategies to help the students
+succeed and improve the quality of the MDS program.
 
 ## Methods
 
@@ -46,7 +46,7 @@ The survey was conducted online anonymously during the lab session on
 April 3rd, 2019. We expected that most of the participants to be UBC MDS
 students in the 2018-2019 cohort as the distribution was via the Slack
 channel for DSCI 554 course. The survey content focused on gathering MDS
-students’ study behaviour and location preference in block 5. We limited
+students’ study behavior and location preference in block 5. We limited
 the study scope to a specific recently completed block in the attempt to
 reduce the confounding variable of block difficulty. In the pursuit of
 more accurate results, we identified and addressed plausible confounding
@@ -65,10 +65,10 @@ the data is not available to the public.
 
 We gathered data from 59 participants from the MDS 2018-2019 cohort. The
 data collected from Qualtrics was exported to a CSV for analysis. We
-suppressed the IP address columns to guarunteed complete anonymity.
+suppressed the IP address columns to guarantee complete anonymity.
 
 The data is being stored in a private repository only accessible by the
-core study team and authorized personels. It can be located
+core study team and authorized personnel. It can be located
 [here](https://github.ubc.ca/MDS-2018-19/DSCI_554-lab-time-analysis-DATA).
 
 ###### Table 1. Description of study parameters
@@ -108,7 +108,7 @@ core study team and authorized personels. It can be located
 | Other    |  1 |
 
 We found that 24 students usually study in an academic setting, while 34
-students prefer to study at home (Table 3.). We had one students that
+students prefer to study at home (Table 3.). We had one student that
 selected “other” study settings, we omitted the “other” location
 category from the rest of the analysis as it is not
 representative.
@@ -119,7 +119,7 @@ representative.
 
 ###### Figure 1: Histogram of weekly average time spent on all labs in Block 5.
 
-Althought it is not exact, the distribution on amount of time spent on
+Although not exact, the distributions on the amount of time spent on
 labs are roughly normal for both groups (Figure 1.). If the number of
 observations increased, we anticipate more normally distributed values.
 Given the small dataset, it seems to be reasonable to assume normality
@@ -130,7 +130,7 @@ histogram.
 
 ###### Figure 2: Average weekly time spent on labs in relation to the student’s preferred study locations.
 
-There is a larger range of time spent on labs by students whom study at
+There is a larger range of time spent on labs by students who study at
 school (Figure 2). The data appear much more spares and seem to have
 higher values which could be an indication that either people are
 getting distracted at school or people generally put more effort into
@@ -143,10 +143,10 @@ time.
 
 ### Confounding Variables
 
-In the beginning of our study, we identified three confounding
+At the beginning of our study, we identified three confounding
 variables: procrastination, household responsibilities and the commute
 time to the study location. We first conducted statistical tests to
-determine confounding effects of these variables.
+determine the confounding effects of these variables.
 
 #### Comparison - Baseline set-up
 
@@ -161,7 +161,7 @@ The reference point in our model (intercept) is the academic group. On
 average, this group spends 28.7 hours per week on labs; The group who
 study at home (the ‘home’ group) comparatively spend 4.4 hours less.
 However, the difference is not significantly different from 0 (p-value
-\< 0.05) (Model 1.). The statistic conheres with the 95% confidence
+\< 0.05) (Model 1.). The statistic coheres with the 95% confidence
 interval (CIs) of the intercept and slope parameters. In the baseline
 model, the CI of the slope parameter passes 0, which implying that there
 is no significant difference in the time spent on labs when comparing
@@ -233,10 +233,10 @@ calculated by the percentage changes (Model
 
 After we introduced the confounding variable - `commute time to the
 study location per day` into the picture, the model revealed that the
-academic group spends 31.6 hours and the home group spends 5.6 hours
-less compared to the academic group (Model 2.). However, the difference
-between the academic group and home group is not significantly different
-(p-value \< 0.05).
+‘academic’ group spends 31.6 hours and the ‘home’ group spends 5.6
+hours less compared to the academic group (Model 2.). However, the
+difference between the academic group and home group is not
+significantly different (p-value \< 0.05).
 
 From the observed changes, There is not enough evidence that the
 confounding variable influences the relationship between time spent on
@@ -245,14 +245,14 @@ did not change the statistical conclusions. As the standard error of the
 slope coefficient was not significantly different between Model 1. and
 Model 2., it suggests that the commute time to study location did not
 help explain the variation in the data. Furthermore, there is no
-sigificant correlation between commute time and lab completion time
+significant correlation between commute time and lab completion time
 (p-value \< 0.05) (Model 2.).
 
 ## Discussion
 
 “I study better at school”, “I get too distracted when I am at home”, or
 “I can get more help at school” are often phrases that we hear from
-students. We often associate academic settings as better learning
+students. We often associate academic settings as a better learning
 environment due to the atmosphere and proximity of resources available
 to students. In this study, we looked at the MDS 2018-2019 cohort to
 investigate whether the assumption is supported by statistical evidence.
@@ -261,7 +261,7 @@ In this observational study, we tried to establish as much causality as
 possible by collecting information on factors that may influence the
 dependent variable (lab completion time) and independent variable (study
 location). Given the time and resources available, we cannot address all
-the possible confounders. Therefore, we selected few key confounders
+the possible confounders. Therefore, we selected a few key confounders
 that we anticipate to have larger effects on our variables. Our study
 accounted for major factors that may affect a student’s choice of
 location includes commute time to school, commute to study location and
@@ -269,7 +269,7 @@ household responsibilities. Similarly, factors that may affect lab
 completion time included completion of optional questions and extent of
 procrastination. We treated these influential factors as possible
 confounders in our analysis. We assessed each confounder through EDA and
-evaluation of their respective coefficents in the regression model.
+evaluation of their respective coefficients in the regression model.
 
 Out of all the confounding variables considered, only the commute time
 stood out as having a plausible effect on the relationship between study
@@ -286,13 +286,13 @@ environment affects effective learning. Our study question was “Does a
 person’s choice of study location (home/academic setting/other public
 spaces) affect the time they take to finish their MDS assignments
 (exclusion of optional questions)?”, and we found that the study
-locations does not significantly affects the students’ average lab
+locations does not significantly affect the students’ average lab
 completion time. The results suggest that easy access to academic
 settings does not provide significant advantages to students. The
 observed result may also be due to the characteristic of our sample. All
 MDS students had experienced at least one degree of higher education.
-Most students’ study style would have been developed by the time of
-study. Thus, it can be inferred that MDS student’s may already know from
+Most students’ study style would have been developed by the time of the
+survey. Thus, it can be inferred that MDS students may already know from
 experience what kind of environment they work best under. This may
 explain the similar approximate normal distribution of time spent on
 labs among the ‘academic’ group and the ‘home’ group.
