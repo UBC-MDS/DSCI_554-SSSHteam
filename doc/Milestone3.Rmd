@@ -146,7 +146,8 @@ data_filter %>% ggplot(aes(Location, Time_On_Lab_Hr))+
   geom_jitter(width = 0.3, alpha = 0.3)+
   labs(x = 'Usual Study Location',
        y = 'Average weekly time (hr)',
-       title = 'Average weekly time spent on lab assignments in relation to study location')
+       title = 'Average weekly time spent on lab assignments in relation to study location') + theme_bw()
+
 ```
 
 ###### Figure 2: Average weekly time spent on labs in relation to the student's preferred study locations.
